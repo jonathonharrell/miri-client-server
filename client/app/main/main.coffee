@@ -7,7 +7,7 @@ angular.module 'miriClientServerApp'
     url: '/'
     templateUrl: 'app/main/main.html'
     controller: 'MainCtrl'
-    
+
   .state 'main.login',
     url: 'login'
     templateUrl: 'app/authentication/login.html'
@@ -15,12 +15,12 @@ angular.module 'miriClientServerApp'
 
   .state 'main.signup',
     url: 'signup'
-    templateUrl: 'app/main/main.signup.html'
+    templateUrl: 'app/authentication/signup.html'
     controller: 'SignupCtrl'
 
   .state 'main.forgot_password',
     url: 'forgot_password'
-    templateUrl: 'app/main.forgot_password.html'
+    templateUrl: 'app/authentication/forgot_password.html'
     controller: 'ForgotPasswordCtrl'
 
   .state 'main.reset_password',
