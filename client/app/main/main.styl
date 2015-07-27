@@ -1,6 +1,5 @@
 section.main, div.main
-  height 95%
-  overflow-y: auto
+  height 90%
 
   .message-container
     overflow hidden
@@ -9,30 +8,10 @@ section.main, div.main
 .bottom
   height 10%
 
-  .command-box
-    padding 10px
-
-// Display flex (equalizer like foundation, only better but with limited browser support)
-.row-xs-flex
-  display flex
-  display -webkit-flex
-  display -moz-flex
-  display -ms-flex
-
-@media (min-width: 768px)
-  .row-sm-flex
-    display flex
-
-@media (min-width: 992px)
-  .row-md-flex
-    display flex
-
-@media (min-width: 1200px)
-  .row-lg-flex
-    display flex
-
-.equalizer
-  height 100%
+.section-a
+  height 30%
+.section-b
+  height 60%
 
 // Messages
 .message
@@ -48,3 +27,10 @@ section.main, div.main
 footer
   position fixed
   bottom 0
+  background #888
+  width 50%
+  left 25%
+  a
+    color darken(#547980, 15)
+    &:hover, &:active
+      color darken(#547980, 10)
