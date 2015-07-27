@@ -1,25 +1,34 @@
-div(ng-include='"components/navbar/navbar.html"')
+section.container-fluid.miri
+  section.row.main
+    .col-xs-1
+      h5 Status
+      h5 Effects
+    .col-xs-8.equalizer.message-container
+      h5 Main window
+      .row(ng-repeat="data in messages track by $index")
+        .col-xs-12.message(ng-class="data.type")
+          .row
+            .col-xs-1
+              i(ng-class="data.icon", class="fa")
+            .col-xs-11
+              span(compile="data.msg | messageParser")
+    .col-xs-3
+      .row
+        .col-xs-12
+          h5 MiniMap
+      .row
+        .col-xs-12
+          h5 Details
+  section.row.bottom
+    .col-xs-12
+      .row.row-xs-flex
+        .col-xs-1
+        .col-xs-9.equalizer
+          .row.row-xs-flex
+            .col-xs-6.command-box
+              form(role="form", ng-submit="sendCommand()")
+                input.form-control.command-box(ng-model="cmd", input-type="commandBoxType", placeholder="Enter a command...", ng-disabled="{{commandBoxDisabled}}")
+            .col-xs-6
+              h5 Hotkeys
 
-header#banner.hero-unit
-  .container
-    h1 'Allo, 'Allo!
-    p.lead Kick-start your next web app with Angular Fullstack
-    img(src='assets/images/yeoman.png', alt='I\'m Yeoman')
-
-.container
-  .row
-    .col-lg-12
-      h1.page-header Features:
-      ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='thing in awesomeThings')
-        li
-          a(href='#', tooltip='{{thing.info}}')
-            | {{thing.name}}
-
-footer.footer
-  .container
-    p
-      | Angular Fullstack v2.1.0
-      = ' | '
-      a(href='https://twitter.com/tyhenkel') @tyhenkel
-      = ' | '
-      a(href='https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open') Issues
+.ui-view

@@ -1,0 +1,9 @@
+.container
+  section.row(ng-controller='FooterCtrl')
+    .col-xs-12.text-center
+      p
+        | Miri Online &copy; Jonathon Harrell; @overlysunny
+        = '    '
+        a(href='#', ng-click="open('terms-static')") Terms
+        = ' | '
+        a(href='#', ng-click="open('privacy')") Privacy

@@ -1,0 +1,8 @@
+div
+  .modal-header
+    button.close(type='button', data-dismiss='modal', ng-click='$dismiss()')
+      span(aria-hidden='true') &times;
+      span.sr-only Close
+    h3.modal-title Terms of Service
+  .modal-body
+    section(ng-include='"components/static/terms-content.html"')
