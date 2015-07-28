@@ -28,7 +28,7 @@ section.container-fluid.miri
         .col-xs-6
           .miri-panel
             form(role="form", ng-submit="sendCommand()")
-              input.form-control.command-box(ng-model="cmd", input-type="commandBoxType", placeholder="Enter a command...", ng-disabled="{{commandBoxDisabled}}")
+              input.form-control.command-box(ng-model="cmd", input-type="text", placeholder="Enter a command...", ng-disabled="{{commandBoxDisabled}}")
         .col-xs-6
           .miri-panel
             h5 Hotkeys
