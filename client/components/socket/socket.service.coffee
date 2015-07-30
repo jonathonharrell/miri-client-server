@@ -10,10 +10,11 @@ angular.module 'miriClientServerApp'
       if window["WebSocket"]
         console.log "connected"
         @ws = new WebSocket("ws://localhost:8080")
-        @ws.onmessage = (msg) ->
-          console.log msg
 
     @send: (msg) ->
       @ws.send msg
+
+    @attachOnMessage: (listener) ->
+      @ws.onmessage = listener
 
   return SocketService

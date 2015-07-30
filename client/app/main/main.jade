@@ -6,13 +6,9 @@ section.container-fluid.miri
     .col-xs-8.miri
       .miri-panel
         h5 Main window
-        .row(ng-repeat="data in messages track by $index").message-container
-          .col-xs-12.message(ng-class="data.type")
-            .row
-              .col-xs-1
-                i(ng-class="data.icon", class="fa")
-              .col-xs-11
-                span(compile="data.msg | messageParser")
+        .message-container(message-box="msgs")
+          .row(ng-repeat="m in msgs")
+            .col-xs-12.message {{m.data}}
     .col-xs-3.miri
       .row.section-a
         .col-xs-12.miri
