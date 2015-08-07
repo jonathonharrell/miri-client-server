@@ -24,7 +24,10 @@ section.container-fluid.miri
         .col-xs-6
           .miri-panel
             form(role="form", ng-submit="sendCommand()")
-              input.form-control.command-box(ng-model="cmd", input-type="text", placeholder="Enter a command...", ng-disabled="{{commandBoxDisabled}}")
+              select.form-control(ng-model="dialog.command", ng-init="dialog.command = 'say'")
+                option(value="say") Say
+                option(value="yell") Yell
+              input.form-control.command-box(ng-model="dialog.args.input", input-type="text", placeholder="Enter a command...", ng-disabled="{{commandBoxDisabled}}")
         .col-xs-6
           .miri-panel
             h5 Hotkeys

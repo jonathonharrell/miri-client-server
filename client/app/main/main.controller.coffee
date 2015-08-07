@@ -12,5 +12,5 @@ angular.module 'miriClientServerApp'
     $scope.$apply()
 
   $scope.sendCommand = ->
-    Socket.send $scope.cmd
-    $scope.cmd = ''
+    Socket.send JSON.stringify $scope.dialog
+    $scope.dialog.args.input = ''
