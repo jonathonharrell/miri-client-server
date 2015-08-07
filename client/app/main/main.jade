@@ -23,11 +23,20 @@ section.container-fluid.miri
       .row
         .col-xs-6
           .miri-panel
-            form(role="form", ng-submit="sendCommand()")
-              select.form-control(ng-model="dialog.command", ng-init="dialog.command = 'say'")
-                option(value="say") Say
-                option(value="yell") Yell
-              input.form-control.command-box(ng-model="dialog.args.input", input-type="text", placeholder="Enter a command...", ng-disabled="{{commandBoxDisabled}}")
+            form(role="form", ng-submit="sendCommand()", ng-init="dialog.command = 'say'")
+              .input-group
+                .input-group-btn(dropdown="", is-open="dialogSelectOpen", ng-init="dialogSelectOpen = false")
+                  button#dialog-select.btn.btn-default(dropdown-toggle="", type="button")
+                    | {{dialog.command.charAt(0).toUpperCase() + dialog.command.slice(1)}} 
+                    span.caret
+                  ul.dropdown-menu(role="menu", aria-labelled-by="dialog-select")
+                    li(role="menuitem")
+                      a(ng-click="dialog.command = 'say'") Say
+                    li(role="menuitem")
+                      a(ng-click="dialog.command = 'yell'") Yell
+                input.form-control.command-box(type='text', name="dialogInput", aria-label='...', ng-model="dialog.args.input", placeholder="...", ng-disabled="{{commandBoxDisabled}}")
+                .input-group-btn
+                  button.btn.btn-default Emotes
         .col-xs-6
           .miri-panel
             h5 Hotkeys
