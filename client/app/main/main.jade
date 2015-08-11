@@ -23,7 +23,7 @@ section.container-fluid.miri
       .row
         .col-xs-6
           .miri-panel
-            form(role="form", ng-submit="sendCommand()", ng-init="dialog.command = 'Say'")
+            form(role="form", ng-submit="sendCommand()", ng-init="dialog.command = 'say'")
               .input-group
                 .input-group-btn(dropdown="", is-open="dialogSelectOpen", ng-init="dialogSelectOpen = false")
                   button#dialog-select.btn.btn-default(dropdown-toggle="", type="button")
@@ -31,9 +31,9 @@ section.container-fluid.miri
                     span.caret
                   ul.dropdown-menu(role="menu", aria-labelled-by="dialog-select")
                     li(role="menuitem")
-                      a(ng-click="dialog.command = 'Say'") Say
+                      a(ng-click="dialog.command = 'say'") Say
                     li(role="menuitem")
-                      a(ng-click="dialog.command = 'Yell'") Yell
+                      a(ng-click="dialog.command = 'yell'") Yell
                 input.form-control.command-box(type='text', name="dialogInput", aria-label='...', ng-model="dialog.args.input", placeholder="...", ng-disabled="{{commandBoxDisabled}}")
                 .input-group-btn
                   button.btn.btn-default Emotes
