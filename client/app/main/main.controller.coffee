@@ -2,7 +2,7 @@
 
 angular.module 'miriClientServerApp'
 .controller 'MainCtrl', ($scope, $state, Authentication, Socket) ->
-  $state.transitionTo 'main.login' unless Authentication.isAuthenticated()
+  $state.transitionTo 'main.login' unless Authentication.isAuthenticated
 
   $scope.msgs = []
 

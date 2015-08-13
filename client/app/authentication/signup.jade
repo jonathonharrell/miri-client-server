@@ -30,7 +30,7 @@
               .col-sm-5
                 div(password-strength="user.password || ''")
             p.help-block(ng-show='(form.password.$error.minlength || form.password.$error.required) && submitted')
-              | Password must be at least 3 characters.
+              | Password must be at least 6 characters.
             p.help-block(ng-show='form.password.$error.mongoose')
               | {{ errors.password }}
 

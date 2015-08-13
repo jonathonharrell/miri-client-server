@@ -3,8 +3,6 @@
 angular.module 'miriClientServerApp'
 .service 'Authentication', ->
   class AuthService
-    @isAuthenticated: ->
-      # !!Session.userId
-      true
+    @isAuthenticated: false
 
   return AuthService
