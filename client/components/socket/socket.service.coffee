@@ -8,7 +8,8 @@ angular.module 'miriClientServerApp'
     @connect: (callback) ->
       if window["WebSocket"]
         @ws = new WebSocket("ws://localhost:8080")
-        callback "Connected"
+        @ws.onopen = ->
+          callback "Connected"
 
         @ws.onmessage = (m) ->
           msg = JSON.parse m.data
