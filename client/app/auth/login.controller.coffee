@@ -1,9 +1,14 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'LoginCtrl', ($scope, Auth, Socket) ->
+.controller 'LoginCtrl', ($scope, $state, Auth, UserStates, Socket) ->
   $scope.login = ->
-    data = JSON.stringify
+    Socket.send
       command: "authenticate"
       args: $scope.user
-    Socket.send data
+
+  $scope.$on "ws.authenticate", (e, m) ->
+    console.log m
+    if m.success
+      Auth.state = UserStates.InGame.name
+      $state.go UserStates[Auth.state].defaultState
