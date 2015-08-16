@@ -7,3 +7,5 @@ iojs version 2.4.0
 - Remaining auth screens: Account Pages
 - Organize code a little better
 - Start getting some of the styles in
+- Server down message
+- Character Select/Create state
