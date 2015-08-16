@@ -1,20 +1,24 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.service 'Socket', ->
+.service 'Socket', ($rootScope) ->
   class SocketService
     @ws: null
 
-    @connect: ->
-      console.log "connecting..."
+    @connect: (callback) ->
       if window["WebSocket"]
-        console.log "connected"
         @ws = new WebSocket("ws://localhost:8080")
+        callback "Connected"
+
+        @ws.onmessage = (m) ->
+          msg = JSON.parse m.data
+          $rootScope.$broadcast 'ws.' + msg.response_to, msg
+      return
+
+    @connected: ->
+      @ws["send"]
 
     @send: (msg) ->
-      @ws.send msg
-
-    @attachOnMessage: (listener) ->
-      @ws.onmessage = listener
+      @ws.send JSON.stringify(msg)
 
   return SocketService

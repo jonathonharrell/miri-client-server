@@ -1,16 +1,19 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'MainCtrl', ($scope, $state, Authentication, Socket) ->
-  $state.transitionTo 'main.login' unless Authentication.isAuthenticated
-
+.controller 'MainCtrl', ($scope, $state, Auth, UserStates, Socket) ->
   $scope.msgs = []
 
-  Socket.connect()
-  Socket.attachOnMessage (msg) ->
+  $scope.loading_message = "Connecting..."
+  Socket.connect (m) ->
+    $scope.loading_message = m
+    Auth.state = UserStates.NotAuthenticated.name
+    $state.go UserStates[Auth.state].defaultState
+
+  $scope.$on "ws.general_message", (e) ->
     $scope.msgs.push msg
     $scope.$apply()
 
   $scope.sendCommand = ->
-    Socket.send JSON.stringify $scope.dialog
+    Socket.send $scope.dialog
     $scope.dialog.args.input = ''

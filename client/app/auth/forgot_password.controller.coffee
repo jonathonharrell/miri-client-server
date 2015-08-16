@@ -1,5 +1,5 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'ForgotPasswordCtrl', ($scope, Authentication) ->
+.controller 'ForgotPasswordCtrl', ($scope, Auth) ->
   # do stuff

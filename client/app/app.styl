@@ -45,6 +45,7 @@ html, body, .miri
   justify-content center
   align-items center
   resize both
+  z-index 2
 
 .border
   border 1px solid rgba(0, 0, 0, 0.1)
@@ -52,7 +53,7 @@ html, body, .miri
 // Component styles are injected through grunt
 // injector
 @import '_functions.styl';
-@import 'authentication/authentication.styl';
+@import 'auth/auth.styl';
 @import 'main/main.styl';
 @import 'directives/passwordStrength/passwordStrength.styl';
 // endinjector

@@ -1,9 +1,9 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'SignupCtrl', ($scope, Authentication, Socket) ->
-  $scope.register = ->
+.controller 'LoginCtrl', ($scope, Auth, Socket) ->
+  $scope.login = ->
     data = JSON.stringify
-      command: "createuser"
+      command: "authenticate"
       args: $scope.user
     Socket.send data
