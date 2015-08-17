@@ -46,12 +46,12 @@ angular.module 'miriClientServerApp'
 
   .state 'main.character_create',
     url: 'characters/create'
-    templateUrl: 'app/main.character_create.html'
+    templateUrl: 'app/characters/create.html'
     controller: 'CharacterCreateCtrl'
     required_state: "Authenticated"
 
   .state 'main.character_select',
     url: 'characters'
-    templateUrl: 'app/main.character_select.html'
+    templateUrl: 'app/characters/select.html'
     controller: 'CharacterSelectCtrl'
     required_state: "Authenticated"

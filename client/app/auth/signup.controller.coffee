@@ -14,7 +14,7 @@ angular.module 'miriClientServerApp'
 
   $scope.$on "ws.createuser", (e, m) ->
     if m.success
-      Auth.state = UserStates.InGame.name
+      Auth.state = UserStates.Authenticated.name
       $state.go UserStates[Auth.state].defaultState
     else
       $scope.errors =

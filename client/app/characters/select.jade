@@ -1,0 +1,17 @@
+.overlay.miri.container-fluid
+  .container.panel.centered
+    .row
+      .col-sm-4
+      .col-sm-4
+        h1 Select Character
+        hr
+    .row
+      .col-sm-4(ng-repeat='n in [0,1,2]')
+        .character-box
+          p
+            strong Characer Name
+          | List of Traits
+          br
+          | Current Location
+          br
+          | Play Button
