@@ -10,7 +10,8 @@
       .col-sm-4
       .col-sm-4
         form.form(name='form', ng-submit='register(form)', novalidate='')
-          .form-group(ng-class='{ "has-success": errors.email.length <= 0 && submitted, "has-error": errors.email.length > 0 && submitted }')
+          .form-group(ng-class='{ "has-success": errors.email.length <= 0 && submitted,\
+          "has-error": errors.email.length > 0 && submitted }')
             label Email
             input.form-control(type='email', name='email', ng-model='user.email', required='', placeholder='ex. me@awesome.com')
             span(ng-show='errors.email.length > 0 && submitted')

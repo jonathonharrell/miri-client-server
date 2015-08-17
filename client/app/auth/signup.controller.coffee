@@ -2,6 +2,10 @@
 
 angular.module 'miriClientServerApp'
 .controller 'SignupCtrl', ($scope, $rootScope, $state, UserStates, Auth, Socket) ->
+  $scope.user =
+    email: ''
+    password: ''
+
   $scope.register = ->
     $scope.submitted = true
     Socket.send
