@@ -10,8 +10,8 @@ angular.module 'miriClientServerApp'
     row = Math.round((scope.traitIcon - 1) / per)
     column = (scope.traitIcon - (row * 32) - 1) * 16
     position = '-' + String(column) + 'px -' + String(row) + 'px'
-    console.log position
 
     element.css
       background: 'url(\'/assets/images/traits.png\') ' + position + ' no-repeat'
-    element.addClass 'trait'
+
+    # @todo tooltip
