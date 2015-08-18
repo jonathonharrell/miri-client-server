@@ -1,36 +1,39 @@
-@import "font-awesome/css/font-awesome.css"
 @import "bootstrap/dist/css/bootstrap.css"
 
+color-blue   = #4C5C6D
+color-brown  = #A79171
+color-gold   = #A79C71
+color-purple = #585273
 
-// we probably won't need glyphicons or fontawesome, but leaving it in for now
-@font-face
-    font-family: 'Glyphicons Halflings'
-    src: url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot')
-    src: url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
-    url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff'),
-    url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
-    url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
-
-// font awesome
-@font-face
-  font-family: 'FontAwesome'
-  src: url('../bower_components/font-awesome/fonts/fontawesome-webfont.eot?v=4.1.0')
-  src: url('../bower_components/font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'),
-  url('../bower_components/font-awesome/fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'),
-  url('../bower_components/font-awesome/fonts/fontawesome-webfont.ttf?v=4.1.0') format('truetype'),
-  url('../bower_components/font-awesome/fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
-  font-weight: normal
-  font-style: normal
+color-aluminum    = #999999
+color-white       = #FFFFFF
+color-ghost       = #FAFAFA
+color-snow        = #F9F9F9
+color-vapor       = #F6F6F6
+color-white-smoke = #F5F5F5
+color-silver      = #EFEFEF
+color-smoke       = #EEEEEE
+color-gainsboro   = #DDDDDD
+color-iron        = #CCCCCC
+color-base        = #AAAAAA
+color-jumbo       = #888888
+color-monsoon     = #777777
+color-steel       = #666666
+color-charcoal    = #555555
+color-tuatara     = #444444
+color-oil         = #333333
+color-jet         = #222222
+color-black       = #000000
 
 html, body, .miri
   height 100%
-  background #444
+  background darken(color-purple, 25)
 
 .miri-panel
-  background #594F4F
+  background darken(color-blue, 20%)
   margin 1em
-  color #bbb
-  border 2px solid #E5FCC2
+  color color-iron
+  border 2px solid lighten(color-gold, 10%)
   height 90%
   padding 1em
 

@@ -4,8 +4,10 @@ section.main, div.main
   .message-container
     overflow-y scroll
     overflow-x auto
-    background #777
+    background color-monsoon
     height 50%
+    &::-webkit-scrollbar
+      display none
 
 .bottom
   height 10%
@@ -18,10 +20,10 @@ section.main, div.main
 footer
   position fixed
   bottom 0
-  background #888
+  background color-monsoon
   width 50%
   left 25%
   a
-    color darken(#547980, 15)
+    color darken(color-blue, 15)
     &:hover, &:active
-      color darken(#547980, 10)
+      color darken(color-blue, 10)
