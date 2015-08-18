@@ -6,9 +6,9 @@ angular.module 'miriClientServerApp'
   scope:
     traitIcon: '='
   link: (scope, element) ->
-    per = 32 # 512/16
+    per = 16 # 512/32
     row = Math.round((scope.traitIcon - 1) / per)
-    column = (scope.traitIcon - (row * 32) - 1) * 16
+    column = (scope.traitIcon - (row * 16) - 1) * 32
     position = '-' + String(column) + 'px -' + String(row) + 'px'
 
     element.css
