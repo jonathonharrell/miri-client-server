@@ -25,38 +25,9 @@ color-oil         = #333333
 color-jet         = #222222
 color-black       = #000000
 
-html, body, .miri
-  height 100%
-  background darken(color-purple, 25)
-
-.miri-panel
-  background darken(color-blue, 20%)
-  margin 1em
-  color color-iron
-  border 2px solid lighten(color-gold, 10%)
-  height 90%
-  padding 1em
-
-.overlay
-  position absolute
-  top 0
-  left 0
-  width 100%
-  overflow hidden
-  background rgba(0, 0, 0, 0.25)
-  display flex
-  justify-content center
-  align-items center
-  resize both
-  z-index 2
-
-.border
-  border 1px solid rgba(0, 0, 0, 0.1)
-
 // Component styles are injected through grunt
 // injector
 @import '_functions.styl';
-@import 'auth/auth.styl';
 @import 'main/main.styl';
 @import 'directives/passwordStrength/passwordStrength.styl';
 // endinjector
