@@ -11,6 +11,7 @@ angular.module 'miriClientServerApp'
 
     if connect_failure >= 3
       connect_failure = 0
+      $scope.messages = []
       $scope.error_message = m
     else
       $timeout $scope.connect, 1000
@@ -25,7 +26,6 @@ angular.module 'miriClientServerApp'
 
   $scope.connect = ->
     $scope.error_message = false
-    $scope.messages = []
 
     Socket.connect (m) ->
       $scope.loading_message = m
