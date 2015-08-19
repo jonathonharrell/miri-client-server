@@ -5,13 +5,15 @@
         h1 Select Character
         hr
     .row
-      .col-sm-4(ng-repeat='n in [0,1,2]')
+      .col-sm-4(ng-repeat='n in [1,4]')
         .character-box
-          br
-          br
-          p
-            h4 Character Name
-          trait(trait-icon='n + 1')
+          h4 Character Name
+          trait(trait-icon='n')
+          p A quick little blurb about the character maybe. 
           br
           | Current Location
           a.btn.play-btn.btn-primary.btn-lg Play
+      .col-sm-4
+        .character-box
+          h4 Empty
+          a.btn.play-btn.btn-primary.btn-lg Create
