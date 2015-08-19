@@ -11,6 +11,7 @@ angular.module 'miriClientServerApp'
 
   .state 'main.connecting',
     url: 'connecting'
+    controller: 'ConnectingCtrl'
     templateUrl: 'app/main/connecting.html'
     required_state: "Connecting"
 
