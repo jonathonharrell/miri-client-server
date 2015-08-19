@@ -2,4 +2,4 @@
 
 angular.module 'miriClientServerApp'
 .factory 'Auth', ->
-  state: "Authenticated"
+  state: "Connecting"
