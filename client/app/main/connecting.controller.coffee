@@ -1,21 +1,31 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'ConnectingCtrl', ($scope, $interval, $state, Auth, UserStates, Socket) ->
-  $scope.$on 'ws.unexpected_close', (e, m) ->
-    $scope.error_message = m
+.controller 'ConnectingCtrl', ($scope, $interval, $timeout, $state, Auth, UserStates, Socket) ->
+  connect_failure = 0
+  $scope.messages = []
 
-  # @todo, reconnect attempt a few times before displaying error message
+  $scope.$on 'ws.unexpected_close', (e, m) ->
+    connect_failure += 1
+    $scope.messages.push 'Connection Failed, trying again.'
+
+    if connect_failure >= 3
+      connect_failure = 0
+      $scope.error_message = m
+    else
+      $timeout $scope.connect, 1000
+
+  $scope.loading_message = "Connecting"
+  $scope.loading_postfix = "..."
+
+  $interval ->
+    $scope.loading_postfix += "." if $scope.loading_postfix.length <= 3
+    $scope.loading_postfix  = "." if $scope.loading_postfix.length > 3
+  , 500
 
   $scope.connect = ->
     $scope.error_message = false
-    $scope.loading_message = "Connecting"
-    $scope.loading_postfix = "..."
-
-    $interval ->
-      $scope.loading_postfix += "." if $scope.loading_postfix.length <= 3
-      $scope.loading_postfix  = "." if $scope.loading_postfix.length > 3
-    , 500
+    $scope.messages = []
 
     Socket.connect (m) ->
       $scope.loading_message = m

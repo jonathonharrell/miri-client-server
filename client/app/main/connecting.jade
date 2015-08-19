@@ -3,7 +3,9 @@
     .row.text-center
       .col-sm-4
       .col-sm-4
-        h2(ng-show='!error_message') {{loading_message}}{{loading_postfix}}
+        div(ng-show='!error_message')
+          h2 {{loading_message}}{{loading_postfix}}
+          p(ng-repeat='m in messages track by $index') {{m}}
         div(ng-show='error_message')
           h2 Connection Failed
           p {{error_message}}
