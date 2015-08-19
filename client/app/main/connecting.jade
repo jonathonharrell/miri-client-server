@@ -1,8 +1,7 @@
 .overlay.miri.container-fluid
   .container.panel.centered.miri-panel
     .row.text-center
-      .col-sm-4
-      .col-sm-4
+      .col-sm-12
         div(ng-show='!error_message')
           h2 {{loading_message}}{{loading_postfix}}
           p(ng-repeat='m in messages track by $index') {{m}}
