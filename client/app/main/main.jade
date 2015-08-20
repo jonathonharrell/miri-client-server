@@ -1,21 +1,21 @@
-section.container-fluid.miri
+section.container-fluid
   section.row.main
-    .col-xs-1.miri
+    .col-xs-1
       .miri-panel
         h5 Status Effects
-    .col-xs-8.miri
+    .col-xs-8
       .miri-panel
         h5 Main window
         .message-container(message-box="msgs")
           .row(ng-repeat="m in msgs")
             .col-xs-12.message {{m.data}}
-    .col-xs-3.miri
+    .col-xs-3
       .row.section-a
-        .col-xs-12.miri
+        .col-xs-12
           .miri-panel
             h5 Weather and other location details
       .row.section-b
-        .col-xs-12.miri
+        .col-xs-12
           .miri-panel
             h5 Interactable entities
   section.row.bottom

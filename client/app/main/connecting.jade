@@ -1,12 +1,11 @@
-.overlay.miri.container-fluid
-  .container.panel.centered.miri-panel
-    .row.text-center
-      .col-sm-12
-        div(ng-show='!error_message')
-          h2 {{loading_message}}{{loading_postfix}}
-          p(ng-repeat='m in messages track by $index') {{m}}
-        div(ng-show='error_message')
-          h2 Connection Failed
-          p {{error_message}}
-          a.btn.btn-lg.btn-default(ng-click='connect()') Try Again
+.overlay.container-fluid
+  .miri-panel
+    .text-center
+      div(ng-show='!error_message')
+        h2 {{loading_message}}{{loading_postfix}}
+        p(ng-repeat='m in messages track by $index') {{m}}
+      div(ng-show='error_message')
+        h2 Connection Failed
+        p {{error_message}}
+        a.btn.btn-lg.btn-default(ng-click='connect()') Try Again
           

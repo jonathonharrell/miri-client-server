@@ -1,6 +1,9 @@
-html, body, .miri
+html, body, .play-view
   height 100%
   background darken(color-purple, 25)
+
+.play-view
+  min-width 1200px
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak
   display none !important
@@ -22,12 +25,12 @@ input, .btn, button, .form-control,
   color color-iron
   margin 1em
   border-style solid
-  border-width 23px 27px 23px 23px
-  -moz-border-image url(/assets/images/border.png) 23 27 23 23 repeat
-  -webkit-border-image url(/assets/images/border.png) 23 27 23 23 repeat
-  -o-border-image url(/assets/images/border.png) 23 27 23 23 repeat
-  border-image url(/assets/images/border.png) 23 27 23 23 fill repeat
-  border-image-outset 12px
+  border-width 23px
+  -moz-border-image url(/assets/images/border.png) 23 repeat
+  -webkit-border-image url(/assets/images/border.png) 23 repeat
+  -o-border-image url(/assets/images/border.png) 23 repeat
+  border-image url(/assets/images/border.png) 23 fill repeat
+  border-image-outset 6px
   height 95%
   border-radius(0)
   a:not(.btn)
@@ -43,6 +46,7 @@ input, .btn, button, .form-control,
   top 0
   left 0
   width 100%
+  height 100%
   overflow hidden
   background rgba(0, 0, 0, 0.4)
   display flex
@@ -51,7 +55,12 @@ input, .btn, button, .form-control,
   resize both
   z-index 2
   .miri-panel
-    height: auto
+    height auto
+    min-width 700px
+    width 50%
+    .inner-panel
+      width 75%
+      margin 0 auto
 
 .border
   border 1px solid rgba(0, 0, 0, 0.1)
