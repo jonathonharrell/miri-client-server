@@ -2,4 +2,4 @@
 
 angular.module 'miriClientServerApp'
 .factory 'Auth', ->
-  state: "NotAuthenticated"
+  state: "InGame"
