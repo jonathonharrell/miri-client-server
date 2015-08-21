@@ -40,6 +40,28 @@ input, .btn, button, .form-control,
   hr
     border-top 1px solid color-iron
 
+.overlay
+  top 0
+  left 0
+  width 100%
+  height 100%
+  overflow hidden
+  background rgba(0, 0, 0, 0.4)
+  display flex
+  justify-content center
+  align-items center
+  resize both
+  z-index 2
+  .miri-panel
+    height auto
+    min-width 700px
+    width 50%
+    &.max
+      width 90%
+    .inner-panel
+      width 75%
+      margin 0 auto
+
 .status-effects-box, .location-box, .action-box, .weather-box, .entities-box, .overlay,
 .hotkeys-box, .movement-box, .chat-box
   position absolute
@@ -96,28 +118,6 @@ input, .btn, button, .form-control,
   height 15%
   left 42%
 
-.overlay
-  top 0
-  left 0
-  width 100%
-  height 100%
-  overflow hidden
-  background rgba(0, 0, 0, 0.4)
-  display flex
-  justify-content center
-  align-items center
-  resize both
-  z-index 2
-  .miri-panel
-    height auto
-    min-width 700px
-    width 50%
-    &.max
-      width 90%
-    .inner-panel
-      width 75%
-      margin 0 auto
-
 .logo
   background url(/assets/images/logo.png)
   height 80px
@@ -149,24 +149,3 @@ input, .btn, button, .form-control,
     bottom 20px
     width 34%
     left 33%
-
-trait
-  width 32px
-  height 32px
-  display inline-block
-  border 4px solid color-gainsboro
-  padding 16px
-  &:hover
-    border 4px solid color-iron
-
-footer
-  position fixed
-  bottom -10px
-  background color-monsoon
-  width 50%
-  left 25%
-  padding 5px
-  a
-    color darken(color-blue, 15)
-    &:hover, &:active
-      color darken(color-blue, 10)
