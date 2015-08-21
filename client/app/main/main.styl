@@ -31,7 +31,6 @@ input, .btn, button, .form-control,
   -o-border-image url(/assets/images/border.png) 23 repeat
   border-image url(/assets/images/border.png) 23 fill repeat
   border-image-outset 6px
-  height 95%
   border-radius(0)
   a:not(.btn)
     color lighten(color-blue, 25)
@@ -41,8 +40,63 @@ input, .btn, button, .form-control,
   hr
     border-top 1px solid color-iron
 
-.overlay
+.status-effects-box, .location-box, .action-box, .weather-box, .entities-box, .overlay,
+.hotkeys-box, .movement-box, .chat-box
   position absolute
+
+.status-effects-box
+  width 5%
+  height 85%
+  left 5px
+  top 0
+  border-width 0
+  border-radius(200px)
+  box-shadow(0 0 10px 6px darken(color-purple, 35))
+  padding 30px 4px
+
+.location-box
+  width 70%
+  height 25%
+  left 7%
+  top 0
+
+.action-box
+  width 70%
+  height 45%
+  left 7%
+  top 27%
+
+.weather-box
+  width 19%
+  height 20%
+  right 5px
+  top 0
+
+.entities-box
+  width 19%
+  height 50%
+  right 5px
+  top 22%
+
+.movement-box
+  right 5px
+  width 19%
+  top 74%
+  height 20%
+
+.chat-box
+  width 33%
+  top 74%
+  height 10%
+  left 7%
+
+.hotkeys-box
+  top 74%
+  width 35%
+  height 15%
+  left 42%
+
+.overlay
   top 0
   left 0
   width 100%
@@ -64,35 +118,21 @@ input, .btn, button, .form-control,
       width 75%
       margin 0 auto
 
-.border
-  border 1px solid rgba(0, 0, 0, 0.1)
-
 .logo
   background url(/assets/images/logo.png)
   height 80px
   width 280px
   position absolute
   bottom 0
-  left 0
+  left -20px
 
-section.main, div.main
-  height 90%
-
-  .message-container
-    overflow-y scroll
-    overflow-x auto
-    background color-monsoon
-    height 50%
-    &::-webkit-scrollbar
-      display none
-
-.bottom
-  height 10%
-
-.section-a
-  height 30%
-.section-b
-  height 60%
+.message-container
+  overflow-y scroll
+  overflow-x auto
+  background color-monsoon
+  height 50%
+  &::-webkit-scrollbar
+    display none
 
 .character-box
   text-align center
