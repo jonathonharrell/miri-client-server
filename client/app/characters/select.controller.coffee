@@ -1,8 +1,11 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'CharacterSelectCtrl', ($scope, $state, Auth, UserStates, Socket) ->
+.controller 'CharacterSelectCtrl', ($scope, Socket) ->
   $scope.characters = []
 
-  # make socket request for character list, attach to scope
-  
+  Socket.send
+    command: "charlist"
+
+  $scope.$on "ws.charlist", (e, m) ->
+    console.log m

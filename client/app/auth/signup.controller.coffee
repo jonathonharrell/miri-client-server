@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'SignupCtrl', ($scope, $rootScope, $state, UserStates, Auth, Socket) ->
+.controller 'SignupCtrl', ($scope, $rootScope, Auth, Socket) ->
   $scope.user =
     email: ''
     password: ''
@@ -14,8 +14,7 @@ angular.module 'miriClientServerApp'
 
   $scope.$on "ws.createuser", (e, m) ->
     if m.success
-      Auth.state = UserStates.Authenticated.name
-      $state.go UserStates[Auth.state].defaultState
+      Auth.authenticate m
     else
       $scope.errors =
         email: []

@@ -21,6 +21,10 @@ angular.module 'miriClientServerApp'
 
         @ws.onmessage = (m) ->
           msg = JSON.parse m.data
+          
+          # @todo temporary
+          console.log msg
+
           eventName = if msg.response_to.length > 0 then msg.response_to else "general_message"
           $rootScope.$broadcast 'ws.' + msg.response_to, msg
       return
