@@ -6,15 +6,15 @@
         h1 Select Character
         hr
     .row
-      .col-sm-4(ng-repeat='n in [1,4]')
-        .character-box
-          h4 Character Name
-          trait(trait-icon='n')
-          p A quick little blurb about the character maybe. 
-          br
-          | Current Location
-          a.btn.play-btn.btn-primary.btn-lg Play
-      .col-sm-4
-        .character-box
-          h4 Empty
-          a.btn.play-btn.btn-primary.btn-lg Create
+      .col-sm-4(ng-repeat='n in characters track by $index')
+        .character-box(ng-switch='n')
+          span(ng-switch-when='null')
+            h4 Empty
+            a.btn.play-btn.btn-primary.btn-lg Create
+          span(ng-switch-default='')
+            h4 {{ n }}
+            trait(trait-icon='n')
+            p A quick little blurb about the character maybe. 
+            br
+            | Current Location
+            a.btn.play-btn.btn-primary.btn-lg Play
