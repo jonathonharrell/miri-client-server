@@ -10,11 +10,11 @@
         .character-box(ng-switch='n')
           span(ng-switch-when='null')
             h4 Empty
-            a.btn.play-btn.btn-primary.btn-lg Create
+            a.btn.play-btn.btn-primary.btn-lg(ui-sref='main.character_create') Create
           span(ng-switch-default='')
-            h4 {{ n }}
+            h4 {{ n.name }}
             trait(trait-icon='n')
-            p A quick little blurb about the character maybe. 
+            p A quick little blurb about the character maybe.
             br
             | Current Location
-            a.btn.play-btn.btn-primary.btn-lg Play
+            a.btn.play-btn.btn-primary.btn-lg(ng-click='select_character(n.id)') Play

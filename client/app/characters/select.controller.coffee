@@ -13,3 +13,6 @@ angular.module 'miriClientServerApp'
         $scope.characters[i] = null
       else
         $scope.characters[i] = v
+
+  $scope.select_character = (id) ->
+    console.log id
