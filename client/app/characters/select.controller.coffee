@@ -9,7 +9,7 @@ angular.module 'miriClientServerApp'
 
   $scope.$on "ws.charlist", (e, m) ->
     _.each m.data, (v, i) ->
-      if Object.keys(v).length is 0
+      if v is null
         $scope.characters[i] = null
       else
         $scope.characters[i] = v

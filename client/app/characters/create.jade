@@ -1,10 +1,21 @@
 .overlay
   .miri-panel.max
     .row.text-center
-      .col-sm-4
-      .col-sm-4
-        h1 Create Character
+      .col-sm-2
+      .col-sm-8
+        h1 Create Character - {{step_titles[step]}}
         hr
-    .row
+    .row(ng-show='step === 0')
+      .col-sm-2
       .col-sm-4
-        h4 {{races[0].Name}}
+        .row.cc-race(ng-repeat='r in races track by $index', ng-class='{selected: selected_race == r}', ng-click='race_select(r)')
+          .col-sm-4
+            img(src='http://placehold.it/100x100')
+          .col-sm-8
+            h4
+              | {{r.name}}
+              small
+                br
+                | {{r.description}}
+      .col-sm-5.end
+        p(ng-bind-html='selected_race.long_description') 
