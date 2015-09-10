@@ -5,9 +5,9 @@
       .col-sm-8
         h1 Create Character - {{step_titles[step]}}
         hr
-    .row(ng-show='step === 0')
+    .row.char-create(ng-show='step === 0')
       .col-sm-2
-      .col-sm-4
+      .col-sm-4.scrollable
         .row.cc-race(ng-repeat='r in races track by $index', ng-class='{selected: selected_race == r}', ng-click='race_select(r)')
           .col-sm-4
             img(src='http://placehold.it/100x100')
@@ -18,4 +18,11 @@
                 br
                 | {{r.description}}
       .col-sm-5.end
+        h4 Description
         p(ng-bind-html='selected_race.long_description') 
+    .row
+      .col-sm-2
+        
+      .col-sm-8
+        
+      .col-sm-2

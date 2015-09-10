@@ -1,9 +1,14 @@
-.cc-race
-  margin 10px 0px
-  background lighten(color-blue, 10)
-  padding 5px
-  border 4px solid lighten(color-blue, 10)
-  cursor pointer
-  &.selected
-    border 4px dotted color-gold
-    cursor default
+.char-create
+  .cc-race
+    margin 10px 0px
+    background lighten(color-blue, 10)
+    padding 5px
+    border 4px solid lighten(color-blue, 10)
+    cursor pointer
+    &.selected
+      border 4px dotted lighten(color-gold, 10)
+      cursor default
+  .scrollable
+    max-height 350px
+    overflow-x hidden
+    overflow-y scroll
