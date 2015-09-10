@@ -22,7 +22,14 @@
         p(ng-bind-html='selected_race.long_description') 
     .row
       .col-sm-2
-        
+        span(ng-show='step !== 0')
+          .previous-arrow
+          .step-text Previous
+        span(ng-show='step === 0')
+          .previous-arrow
+          .step-text Cancel
       .col-sm-8
-        
       .col-sm-2
+        span.pull-right
+          .step-text Next
+          .next-arrow
