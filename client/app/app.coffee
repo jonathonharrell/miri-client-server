@@ -1,5 +1,9 @@
 'use strict'
 
+@nanobar = new Nanobar(
+  id: 'nano'
+)
+
 angular.module 'miriClientServerApp', [
   'ngCookies',
   'ngResource',
@@ -19,3 +23,8 @@ angular.module 'miriClientServerApp', [
     if next.required_state isnt Auth.state
       event.preventDefault()
       $state.go UserStates[Auth.state].defaultState
+
+    nanobar.go 30
+
+  $rootScope.$on '$stateChangeSuccess', (event, next) ->
+    nanobar.go 100

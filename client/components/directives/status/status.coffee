@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.directive 'trait', ->
+.directive 'statusEffect', ->
   restrict: 'EA'
   scope:
     icon: '='
@@ -13,7 +13,7 @@ angular.module 'miriClientServerApp'
 
     unless scope.icon < 0 or scope.icon > 256
       element.css
-        background: 'url(\'/assets/images/traits.png\') ' + position + ' no-repeat'
+        background: 'url(\'/assets/images/status_effects.png\') ' + position + ' no-repeat'
     else
       element.css
         background: 'url(\'http://placehold.it/32x32\') center no-repeat'

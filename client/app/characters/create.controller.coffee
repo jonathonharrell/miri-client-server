@@ -53,5 +53,5 @@ angular.module 'miriClientServerApp'
     $scope.character.functional_traits = null if $scope.step <= 3
     $scope.character.aesthetic_traits = null  if $scope.step <= 2
     $scope.character.gender = null            if $scope.step <= 1
-
+    console.log $scope.character
     $scope.step -= 1 if $scope.step > 0
