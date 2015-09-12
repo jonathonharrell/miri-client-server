@@ -25,10 +25,12 @@ angular.module 'miriClientServerApp'
     Socket.send
       command: "charcreate"
       args: $scope.character
+    nanobar.go 30
 
   $scope.step_back = ->
     Socket.send
       command: "charcreatestepback"
+    nanobar.go 30
 
   Socket.send
     command: "newchar"
@@ -37,6 +39,7 @@ angular.module 'miriClientServerApp'
     command: "charcreate"
 
   $scope.$on "ws.charcreateraces", (e, m) ->
+    nanobar.go 100 if $scope.character.race?
     _.each m.data, (val) ->
       $scope.races[val.id] = val
     $scope.character.race = _.sample(m.data).id unless $scope.character.race?
@@ -46,6 +49,7 @@ angular.module 'miriClientServerApp'
       $scope.genders[val.id] = val
     $scope.character.gender = _.sample(m.data).id unless $scope.character.gender?
     $scope.step += 1 if $scope.step is 0
+    nanobar.go 100
 
   $scope.$on "ws.charcreatestepback", (e, m) ->
     $scope.character.name = null              if $scope.step <= 5
@@ -53,5 +57,6 @@ angular.module 'miriClientServerApp'
     $scope.character.functional_traits = null if $scope.step <= 3
     $scope.character.aesthetic_traits = null  if $scope.step <= 2
     $scope.character.gender = null            if $scope.step <= 1
-    console.log $scope.character
+
     $scope.step -= 1 if $scope.step > 0
+    nanobar.go 100
