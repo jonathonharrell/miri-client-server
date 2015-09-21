@@ -6,8 +6,8 @@ angular.module 'miriClientServerApp'
   $scope.step_titles = ['Race', 'Gender', 'Aesthetic Traits', 'Functional Traits', 'Background', 'Name']
   $scope.races = {}
   $scope.genders = {}
-  $scope.aesthetic_traits = {}
-  $scope.functional_traits = {}
+  $scope.aesthetic_trait_categories  = {}
+  $scope.functional_trait_categories = {}
   $scope.backgrounds = {}
 
   $scope.character =
@@ -42,13 +42,19 @@ angular.module 'miriClientServerApp'
     nanobar.go 100 if $scope.character.race?
     _.each m.data, (val) ->
       $scope.races[val.id] = val
-    $scope.character.race = _.sample(m.data).id unless $scope.character.race?
+    $scope.character.race = $scope.races['HUMAN'].id unless $scope.character.race?
 
   $scope.$on "ws.charcreategenders", (e, m) ->
     _.each m.data, (val) ->
       $scope.genders[val.id] = val
     $scope.character.gender = _.sample(m.data).id unless $scope.character.gender?
     $scope.step += 1 if $scope.step is 0
+    nanobar.go 100
+
+  $scope.$on "ws.charcreateaesthetic", (e, m) ->
+    _.each m.data, (val) ->
+      $scope.aesthetic_trait_categories[val.id] = val
+    $scope.step += 1 if $scope.step is 1
     nanobar.go 100
 
   $scope.$on "ws.charcreatestepback", (e, m) ->

@@ -20,11 +20,18 @@
       .col-sm-5.end
         h4 Description
         p(ng-bind-html='races[character.race].long_description')
+
     .row.char-create(ng-show='step === 1')
       .col-sm-2
       .col-sm-4.cc-gender(ng-repeat='(id, g) in genders', ng-class='{selected: character.gender == id}', ng-click='select("gender", id)')
-        .col-sm-8
-          h4 {{g.name}}
+        h4 {{g.name}}
+
+    .row.char-create(ng-show='step === 2')
+      .col-sm-2
+      .col-sm-6
+        ul(ng-repeat='(id, c) in aesthetic_trait_categories')
+          li {{c.name}}
+          li(ng-repeat='t in c.traits') {{t.name}}
     .row
       .col-sm-2
         a(ng-show='step !== 0', ng-click='step_back()')
