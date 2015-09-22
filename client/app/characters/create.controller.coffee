@@ -45,6 +45,7 @@ angular.module 'miriClientServerApp'
     $scope.character.race = $scope.races['HUMAN'].id unless $scope.character.race?
 
   $scope.$on "ws.charcreategenders", (e, m) ->
+    $scope.genders = {}
     _.each m.data, (val) ->
       $scope.genders[val.id] = val
     $scope.character.gender = _.sample(m.data).id unless $scope.character.gender?
@@ -52,6 +53,7 @@ angular.module 'miriClientServerApp'
     nanobar.go 100
 
   $scope.$on "ws.charcreateaesthetic", (e, m) ->
+    $scope.aesthetic_trait_categories = {}
     _.each m.data, (val) ->
       $scope.aesthetic_trait_categories[val.id] = val
     $scope.step += 1 if $scope.step is 1
