@@ -35,6 +35,9 @@
             label.rad(ng-if='c.unique')
               input(type='radio', name='{{c.id}}', ng-click='selectAestheticTrait(t.id, c.id)')
               trait.img(icon="t.image")
+            label.ckb(ng-if='!c.unique')
+              input(type='checkbox', name='{{t.id}}', ng-click='selectAestheticTrait(t.id, c.id)')
+              trait.img(icon='t.image')
 
     .row
       .col-sm-2

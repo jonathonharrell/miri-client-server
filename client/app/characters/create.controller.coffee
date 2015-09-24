@@ -33,10 +33,12 @@ angular.module 'miriClientServerApp'
     nanobar.go 30
 
   $scope.selectAestheticTrait = (trait, category) ->
-    console.log $scope.character
     index = $scope.character.aesthetic_traits.indexOf trait
-    $scope.character.aesthetic_traits.push trait if index <= -1 and $scope.category isnt trat
-    delete $scope.character.aesthetic_traits[index] if index >= 0 and $scope[category] is trait
+
+    if $scope[category] and $scope.aesthetic_trait_categories[category].unique
+      $scope.character.aesthetic_traits.splice $scope.character.aesthetic_traits.indexOf($scope[category]), 1
+    $scope.character.aesthetic_traits.push trait if index <= -1 and $scope[category] isnt trait
+    $scope.character.aesthetic_traits.splice index, 1 if $scope[category] is trait and !$scope.aesthetic_trait_categories[category].unique
     $scope[category] = trait
 
   Socket.send
