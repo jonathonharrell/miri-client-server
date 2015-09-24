@@ -31,7 +31,7 @@
       .col-sm-8.text-center
         ul.list-inline(ng-repeat='(id, c) in aesthetic_trait_categories')
           h3 {{c.name}}
-          li(ng-repeat='t in c.traits', tooltip="{{t.name}}")
+          li(ng-repeat='t in c.traits', tooltip-html='"{{t.name}}<br />{{t.description}}"')
             label.rad(ng-if='c.unique')
               input(type='radio', name='{{c.id}}', ng-click='selectAestheticTrait(t.id, c.id)')
               trait.img(icon="t.image")
