@@ -28,10 +28,14 @@
 
     .row.char-create(ng-show='step === 2')
       .col-sm-2
-      .col-sm-6
-        ul(ng-repeat='(id, c) in aesthetic_trait_categories')
-          li {{c.name}}
-          li(ng-repeat='t in c.traits') {{t.name}}
+      .col-sm-8.text-center
+        ul.list-inline(ng-repeat='(id, c) in aesthetic_trait_categories')
+          h3 {{c.name}}
+          li(ng-repeat='t in c.traits', tooltip="{{t.name}}")
+            label.rad(ng-if='c.unique')
+              input(type='radio', name='{{c.id}}', ng-click='selectAestheticTrait(t.id, c.id)')
+              trait.img(icon="t.image")
+
     .row
       .col-sm-2
         a(ng-show='step !== 0', ng-click='step_back()')

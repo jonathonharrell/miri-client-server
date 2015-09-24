@@ -5,13 +5,14 @@ angular.module 'miriClientServerApp'
   restrict: 'EA'
   scope:
     icon: '='
+    tTooltip: '='
   link: (scope, element) ->
     per = 16 # 512/32
     row = Math.round((scope.icon - 1) / per)
     column = (scope.icon - (row * 16) - 1) * 32
     position = '-' + String(column) + 'px -' + String(row) + 'px'
 
-    unless scope.icon < 0 or scope.icon > 256
+    unless scope.icon < 1 or scope.icon > 256
       element.css
         background: 'url(\'/assets/images/traits.png\') ' + position + ' no-repeat'
     else

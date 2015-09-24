@@ -13,8 +13,8 @@ angular.module 'miriClientServerApp'
   $scope.character =
     race: null
     gender: null
-    aesthetic_traits: null
-    functional_traits: null
+    aesthetic_traits: []
+    functional_traits: []
     background: null
     name: null
 
@@ -31,6 +31,13 @@ angular.module 'miriClientServerApp'
     Socket.send
       command: "charcreatestepback"
     nanobar.go 30
+
+  $scope.selectAestheticTrait = (trait, category) ->
+    console.log $scope.character
+    index = $scope.character.aesthetic_traits.indexOf trait
+    $scope.character.aesthetic_traits.push trait if index <= -1 and $scope.category isnt trat
+    delete $scope.character.aesthetic_traits[index] if index >= 0 and $scope[category] is trait
+    $scope[category] = trait
 
   Socket.send
     command: "newchar"
