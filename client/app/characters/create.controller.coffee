@@ -76,6 +76,7 @@ angular.module 'miriClientServerApp'
     unless m.success
       $scope.errors = m.errors
     else
+      $scope.errors = []
       $scope.step += 1
     nanobar.go 100
 
@@ -86,5 +87,6 @@ angular.module 'miriClientServerApp'
     $scope.character.aesthetic_traits = null  if $scope.step <= 2
     $scope.character.gender = null            if $scope.step <= 1
 
+    $scope.errors = []
     $scope.step -= 1 if $scope.step > 0
     nanobar.go 100
