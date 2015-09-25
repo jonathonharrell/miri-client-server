@@ -41,7 +41,8 @@
             label.ckb(ng-if='!c.unique')
               input(type='checkbox', name='{{t.id}}', ng-click='selectAestheticTrait(t, c.id)')
               trait.img(icon='t.image')
-        .cc-description
+        .cc-description.scrollable
+          h4 Description
           p(ng-repeat='(id, desc) in description') {{desc}}
 
     .row

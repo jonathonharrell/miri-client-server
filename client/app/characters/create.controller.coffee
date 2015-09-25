@@ -48,15 +48,13 @@ angular.module 'miriClientServerApp'
       $scope.character.aesthetic_traits.splice $scope.character.aesthetic_traits.indexOf($scope[category]), 1
       delete $scope.description[$scope[category]]
 
-    if index <= -1 and $scope[category] isnt trait.id
+    if index is -1 and $scope[category] isnt trait.id
       $scope.character.aesthetic_traits.push trait.id
       $scope.description[trait.id] = trait.description
 
-    if $scope[category] is trait.id and !$scope.aesthetic_trait_categories[category].unique
+    if index > -1 and !$scope.aesthetic_trait_categories[category].unique
       $scope.character.aesthetic_traits.splice index, 1
       delete $scope.description[trait.id]
-
-    console.log $scope.description
 
     $scope[category] = trait.id
 
