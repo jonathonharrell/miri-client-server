@@ -12,12 +12,14 @@ angular.module 'miriClientServerApp'
     "This is your character background. It is your job to fill in the blanks as you roleplay your character in The Miri, and you can do this as you see fit.",
     "Now that we know a little more about your character, all that's left is to give them a name!"
   ]
+
   $scope.races = {}
   $scope.genders = {}
   $scope.aesthetic_trait_categories  = {}
   $scope.functional_trait_categories = {}
   $scope.backgrounds = {}
   $scope.description = {}
+  $scope.trait_tracker = {}
 
   $scope.character =
     race: null
@@ -44,11 +46,11 @@ angular.module 'miriClientServerApp'
   $scope.selectAestheticTrait = (trait, category) ->
     index = $scope.character.aesthetic_traits.indexOf trait.id
 
-    if $scope[category] and $scope.aesthetic_trait_categories[category].unique
-      $scope.character.aesthetic_traits.splice $scope.character.aesthetic_traits.indexOf($scope[category]), 1
-      delete $scope.description[$scope[category]]
+    if $scope.trait_tracker[category] and $scope.aesthetic_trait_categories[category].unique
+      $scope.character.aesthetic_traits.splice $scope.character.aesthetic_traits.indexOf($scope.trait_tracker[category]), 1
+      delete $scope.description[$scope.trait_tracker[category]]
 
-    if index is -1 and $scope[category] isnt trait.id
+    if index is -1 and $scope.trait_tracker[category] isnt trait.id
       $scope.character.aesthetic_traits.push trait.id
       $scope.description[trait.id] = trait.description
 
@@ -56,7 +58,7 @@ angular.module 'miriClientServerApp'
       $scope.character.aesthetic_traits.splice index, 1
       delete $scope.description[trait.id]
 
-    $scope[category] = trait.id
+    $scope.trait_tracker[category] = trait.id
 
   Socket.send
     command: "newchar"
@@ -92,8 +94,10 @@ angular.module 'miriClientServerApp'
   $scope.$on "ws.charcreatestepback", (e, m) ->
     $scope.character.name = null              if $scope.step <= 5
     $scope.character.background = null        if $scope.step <= 4
-    $scope.character.functional_traits = null if $scope.step <= 3
-    $scope.character.aesthetic_traits = null  if $scope.step <= 2
+    $scope.character.functional_traits = []   if $scope.step <= 3
+    $scope.character.aesthetic_traits = []    if $scope.step <= 2
+    $scope.trait_tracker = {}                 if $scope.step <= 2
+    $scope.description = {}                   if $scope.step <= 2
     $scope.character.gender = null            if $scope.step <= 1
 
     $scope.errors = []
