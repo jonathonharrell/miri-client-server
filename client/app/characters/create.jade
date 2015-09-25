@@ -36,11 +36,13 @@
           h3 {{c.name}}
           li(ng-repeat='t in c.traits', tooltip-html='"{{t.name}}<br />{{t.description}}"')
             label.rad(ng-if='c.unique')
-              input(type='radio', name='{{c.id}}', ng-click='selectAestheticTrait(t.id, c.id)')
+              input(type='radio', name='{{c.id}}', ng-click='selectAestheticTrait(t, c.id)')
               trait.img(icon="t.image")
             label.ckb(ng-if='!c.unique')
-              input(type='checkbox', name='{{t.id}}', ng-click='selectAestheticTrait(t.id, c.id)')
+              input(type='checkbox', name='{{t.id}}', ng-click='selectAestheticTrait(t, c.id)')
               trait.img(icon='t.image')
+        .cc-description
+          p(ng-repeat='(id, desc) in description') {{desc}}
 
     .row
       .col-sm-2

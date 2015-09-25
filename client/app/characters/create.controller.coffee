@@ -17,6 +17,7 @@ angular.module 'miriClientServerApp'
   $scope.aesthetic_trait_categories  = {}
   $scope.functional_trait_categories = {}
   $scope.backgrounds = {}
+  $scope.description = {}
 
   $scope.character =
     race: null
@@ -41,13 +42,23 @@ angular.module 'miriClientServerApp'
     nanobar.go 30
 
   $scope.selectAestheticTrait = (trait, category) ->
-    index = $scope.character.aesthetic_traits.indexOf trait
+    index = $scope.character.aesthetic_traits.indexOf trait.id
 
     if $scope[category] and $scope.aesthetic_trait_categories[category].unique
       $scope.character.aesthetic_traits.splice $scope.character.aesthetic_traits.indexOf($scope[category]), 1
-    $scope.character.aesthetic_traits.push trait if index <= -1 and $scope[category] isnt trait
-    $scope.character.aesthetic_traits.splice index, 1 if $scope[category] is trait and !$scope.aesthetic_trait_categories[category].unique
-    $scope[category] = trait
+      delete $scope.description[$scope[category]]
+
+    if index <= -1 and $scope[category] isnt trait.id
+      $scope.character.aesthetic_traits.push trait.id
+      $scope.description[trait.id] = trait.description
+
+    if $scope[category] is trait.id and !$scope.aesthetic_trait_categories[category].unique
+      $scope.character.aesthetic_traits.splice index, 1
+      delete $scope.description[trait.id]
+
+    console.log $scope.description
+
+    $scope[category] = trait.id
 
   Socket.send
     command: "newchar"
