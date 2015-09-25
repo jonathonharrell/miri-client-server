@@ -4,6 +4,14 @@ angular.module 'miriClientServerApp'
 .controller 'CharacterCreateCtrl', ($scope, $state, Auth, UserStates, Socket) ->
   $scope.step = 0
   $scope.step_titles = ['Race', 'Gender', 'Aesthetic Traits', 'Functional Traits', 'Background', 'Name']
+  $scope.step_descriptions = [
+    "Your choice of race determines your available aesthetic and trait options, as well as potential backgrounds and factions. Some races are more well-received then others in The Miri.",
+    "Your choice of gender will affect a few aesthetic options as well as backgrounds, but has no effect on attributes.",
+    "This is how you look! These traits will have little to no effect on your play experience - they are used primarily to build a description of your character.",
+    "These traits are very important! Their effects range from effecting background choices, to how you are perceived in The Miri, attributes and prowess.",
+    "This is your character background. It is your job to fill in the blanks as you roleplay your character in The Miri, and you can do this as you see fit.",
+    "Now that we know a little more about your character, all that's left is to give them a name!"
+  ]
   $scope.races = {}
   $scope.genders = {}
   $scope.aesthetic_trait_categories  = {}

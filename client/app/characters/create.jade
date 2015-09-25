@@ -4,8 +4,10 @@
       .col-sm-2
       .col-sm-8
         h1 Create Character - {{step_titles[step]}}
-        hr
-        p(ng-repeat='e in errors') {{e}}
+        p {{step_descriptions[step]}}
+        br
+        p(ng-repeat='e in errors') 
+          span.label.label-danger {{e}}
     .row.char-create(ng-show='step === 0')
       .col-sm-2
       .col-sm-4.scrollable
