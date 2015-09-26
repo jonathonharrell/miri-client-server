@@ -30,8 +30,11 @@
         h4 {{g.name}}
 
     .row.char-create(ng-show='step === 2')
-      .col-sm-2
-      .col-sm-8.text-center
+      .col-sm-1
+      .col-sm-3.cc-description.scrollable
+        h4 Description
+        p(ng-repeat='(id, desc) in description') {{desc}}
+      .col-sm-6
         ul.list-inline(ng-repeat='(id, c) in aesthetic_trait_categories')
           h3 {{c.name}}
           li(ng-repeat='t in c.traits', tooltip-html='"{{t.name}}<br />{{t.description}}"')
@@ -41,13 +44,15 @@
             label.ckb(ng-if='!c.unique')
               input(type='checkbox', name='{{t.id}}', ng-click='selectAestheticTrait(t, c.id)')
               trait.img(icon='t.image')
-        .cc-description.scrollable
-          h4 Description
-          p(ng-repeat='(id, desc) in description') {{desc}}
           
     .row.char-create(ng-show='step === 3')
-      .col-sm-2
-      .col-sm-8.text-center
+      .col-sm-1
+      .col-sm-3.cc-description.scrollable
+        p
+          span.yellow {{point_deficit}} Points
+        h4 Selected Traits
+        p I am a follower of... Bahamut
+      .col-sm-6
         ul.list-inline(ng-repeat='(id, c) in functional_trait_categories')
           h3 {{c.name}}
           li(ng-repeat='t in c.traits', tooltip-html='"{{t.name}}<br />{{t.description}}"')

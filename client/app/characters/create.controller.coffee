@@ -17,6 +17,7 @@ angular.module 'miriClientServerApp'
   $scope.genders = {}
   $scope.aesthetic_trait_categories  = {}
   $scope.functional_trait_categories = {}
+  $scope.point_deficit = 0
   $scope.backgrounds = {}
   $scope.description = {}
   $scope.trait_tracker = {}
@@ -47,8 +48,9 @@ angular.module 'miriClientServerApp'
     index = $scope.character.aesthetic_traits.indexOf trait.id
 
     if $scope.trait_tracker[category] and $scope.aesthetic_trait_categories[category].unique
-      $scope.character.aesthetic_traits.splice $scope.character.aesthetic_traits.indexOf($scope.trait_tracker[category]), 1
-      delete $scope.description[$scope.trait_tracker[category]]
+      unless $scope.trait_tracker[category] is trait.id
+        $scope.character.aesthetic_traits.splice $scope.character.aesthetic_traits.indexOf($scope.trait_tracker[category]), 1
+        delete $scope.description[$scope.trait_tracker[category]]
 
     if index is -1 and $scope.trait_tracker[category] isnt trait.id
       $scope.character.aesthetic_traits.push trait.id
@@ -59,6 +61,9 @@ angular.module 'miriClientServerApp'
       delete $scope.description[trait.id]
 
     $scope.trait_tracker[category] = trait.id
+
+  $scope.selectFunctionalTrait = (trait, category) ->
+    # do stuff
 
   Socket.send
     command: "newchar"
