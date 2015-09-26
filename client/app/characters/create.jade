@@ -9,8 +9,8 @@
         p(ng-repeat='e in errors') 
           span.label.label-danger {{e}}
     .row.char-create(ng-show='step === 0')
-      .col-sm-2
-      .col-sm-4.scrollable
+      .col-sm-1
+      .col-sm-5.scrollable
         .row.cc-race(ng-repeat='(id, r) in races', ng-class='{selected: character.race == id}', ng-click='select("race", id)')
           .col-sm-4
             img(src='http://placehold.it/100x100')
@@ -30,7 +30,8 @@
         h4 {{g.name}}
 
     .row.char-create(ng-show='step === 2')
-      .col-sm-3.cc-description.scrollable
+      .col-sm-1
+      .col-sm-2.cc-description.scrollable
         h4 Description
         p(ng-repeat='(id, desc) in description') {{desc}}
       .col-sm-6.end
@@ -45,7 +46,8 @@
               trait.img(icon='t.image')
           
     .row.char-create(ng-show='step === 3')
-      .col-sm-3.cc-description.scrollable
+      .col-sm-1
+      .col-sm-2.cc-description.scrollable
         p
           span.label(ng-class="{'label-danger': point_deficit <= -1, 'label-success': point_deficit >= 0}") {{point_deficit}} Points
         h4 Selected Traits
@@ -60,7 +62,7 @@
             label.ckb(ng-if='!c.unique')
               input(type='checkbox', name='{{t.id}}', ng-click='selectFunctionalTrait(t, c.id)')
               trait.img(icon='t.image')
-      .col-sm-3.cc-description.scrollable
+      .col-sm-2.cc-description.scrollable.end
         p The points tracker in the left column indicates your point deficit. Adding positive traits will decrease your point deficit, 
           | and adding negative ones will increase it. In order for a character to be valid, your point deficit must be greater then or equal to zero.
     .row
