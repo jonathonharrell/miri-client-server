@@ -44,7 +44,19 @@
         .cc-description.scrollable
           h4 Description
           p(ng-repeat='(id, desc) in description') {{desc}}
-
+          
+    .row.char-create(ng-show='step === 3')
+      .col-sm-2
+      .col-sm-8.text-center
+        ul.list-inline(ng-repeat='(id, c) in functional_trait_categories')
+          h3 {{c.name}}
+          li(ng-repeat='t in c.traits', tooltip-html='"{{t.name}}<br />{{t.description}}"')
+            label.rad(ng-if='c.unique')
+              input(type='radio', name='{{c.id}}', ng-click='selectFunctionalTrait(t, c.id)')
+              trait.img(icon="t.image")
+            label.ckb(ng-if='!c.unique')
+              input(type='checkbox', name='{{t.id}}', ng-click='selectFunctionalTrait(t, c.id)')
+              trait.img(icon='t.image')
     .row
       .col-sm-2
         a(ng-show='step !== 0', ng-click='step_back()')

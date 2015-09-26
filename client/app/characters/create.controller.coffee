@@ -83,6 +83,11 @@ angular.module 'miriClientServerApp'
     _.each m.data, (val) ->
       $scope.aesthetic_trait_categories[val.id] = val
 
+  $scope.$on "ws.charcreatefunctional", (e, m) ->
+    $scope.functional_trait_categories = {}
+    _.each m.data, (val) ->
+      $scope.functional_trait_categories[val.id] = val
+
   $scope.$on "ws.charcreatestepup", (e, m) ->
     unless m.success
       $scope.errors = m.errors
