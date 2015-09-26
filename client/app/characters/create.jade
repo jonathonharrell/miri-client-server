@@ -51,7 +51,8 @@
         p
           span.label(ng-class="{'label-danger': point_deficit <= -1, 'label-success': point_deficit >= 0}") {{point_deficit}} Points
         h4 Selected Traits
-        p I am a follower of... Bahamut
+        p(ng-repeat='t in character.functional_traits')
+          {{functional_traits[t].category}} - {{functional_traits[t].name}}
       .col-sm-6
         ul.list-inline(ng-repeat='(id, c) in functional_trait_categories')
           h3 {{c.name}}
@@ -60,7 +61,7 @@
               input(type='radio', name='{{c.id}}', ng-click='selectFunctionalTrait(t, c.id)')
               trait.img(icon="t.image")
             label.ckb(ng-if='!c.unique')
-              input(type='checkbox', name='{{t.id}}', ng-click='selectFunctionalTrait(t, c.id)')
+              input(type='checkbox', name='{{t.id}}', ng-if='!t.required', ng-click='selectFunctionalTrait(t, c.id)')
               trait.img(icon='t.image')
       .col-sm-2.cc-description.scrollable.end
         p The points tracker in the left column indicates your point deficit. Adding positive traits will decrease your point deficit, 

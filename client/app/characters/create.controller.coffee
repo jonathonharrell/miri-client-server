@@ -17,6 +17,7 @@ angular.module 'miriClientServerApp'
   $scope.genders = {}
   $scope.aesthetic_trait_categories  = {}
   $scope.functional_trait_categories = {}
+  $scope.functional_traits = {}
   $scope.point_deficit = 0
   $scope.backgrounds = {}
   $scope.description = {}
@@ -107,6 +108,10 @@ angular.module 'miriClientServerApp'
     $scope.functional_trait_categories = {}
     _.each m.data, (val) ->
       $scope.functional_trait_categories[val.id] = val
+      _.each val.traits, (t) ->
+        t.category = val.name
+        $scope.functional_traits[t.id] = t
+        $scope.character.functional_traits.push t.id if t.required
 
   $scope.$on "ws.charcreatestepup", (e, m) ->
     unless m.success
