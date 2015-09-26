@@ -30,11 +30,10 @@
         h4 {{g.name}}
 
     .row.char-create(ng-show='step === 2')
-      .col-sm-1
       .col-sm-3.cc-description.scrollable
         h4 Description
         p(ng-repeat='(id, desc) in description') {{desc}}
-      .col-sm-6
+      .col-sm-6.end
         ul.list-inline(ng-repeat='(id, c) in aesthetic_trait_categories')
           h3 {{c.name}}
           li(ng-repeat='t in c.traits', tooltip-html='"{{t.name}}<br />{{t.description}}"')
@@ -46,10 +45,9 @@
               trait.img(icon='t.image')
           
     .row.char-create(ng-show='step === 3')
-      .col-sm-1
       .col-sm-3.cc-description.scrollable
         p
-          span.yellow {{point_deficit}} Points
+          span.label(ng-class="{'label-danger': point_deficit <= -1, 'label-success': point_deficit >= 0}") {{point_deficit}} Points
         h4 Selected Traits
         p I am a follower of... Bahamut
       .col-sm-6
@@ -62,6 +60,9 @@
             label.ckb(ng-if='!c.unique')
               input(type='checkbox', name='{{t.id}}', ng-click='selectFunctionalTrait(t, c.id)')
               trait.img(icon='t.image')
+      .col-sm-3.cc-description.scrollable
+        p The points tracker in the left column indicates your point deficit. Adding positive traits will decrease your point deficit, 
+          | and adding negative ones will increase it. In order for a character to be valid, your point deficit must be greater then or equal to zero.
     .row
       .col-sm-2
         a(ng-show='step !== 0', ng-click='step_back()')

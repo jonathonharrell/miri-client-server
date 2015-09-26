@@ -63,7 +63,22 @@ angular.module 'miriClientServerApp'
     $scope.trait_tracker[category] = trait.id
 
   $scope.selectFunctionalTrait = (trait, category) ->
-    # do stuff
+    index = $scope.character.functional_traits.indexOf trait.id
+
+    if $scope.trait_tracker[category] and $scope.functional_trait_categories[category].unique
+      unless $scope.trait_tracker[category] is trait
+        $scope.character.functional_traits.splice $scope.character.functional_traits.indexOf($scope.trait_tracker[category]), 1
+        $scope.point_deficit -= Number($scope.trait_tracker[category].points)
+
+    if index is -1 and $scope.trait_tracker[category] isnt trait
+      $scope.character.functional_traits.push trait.id
+      $scope.point_deficit += Number(trait.points)
+
+    if index > -1 and !$scope.functional_trait_categories[category].unique
+      $scope.character.functional_traits.splice index, 1
+      $scope.point_deficit -= Number(trait.points)
+
+    $scope.trait_tracker[category] = trait
 
   Socket.send
     command: "newchar"
