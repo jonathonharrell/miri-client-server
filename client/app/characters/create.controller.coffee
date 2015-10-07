@@ -9,7 +9,7 @@ angular.module 'miriClientServerApp'
     "Your choice of gender will affect a few aesthetic options as well as backgrounds, but has no effect on attributes.",
     "This is how you look! These traits will have little to no effect on your play experience - they are used primarily to build a description of your character.",
     "These traits are very important! Their effects range from effecting background choices, to how you are perceived in The Miri, attributes and prowess.",
-    "This is your character background. It is your job to fill in the blanks as you roleplay your character in The Miri, and you can do this as you see fit.",
+    "This is your overarching character background - it determines your starting locale and resources, and provides a basis with which to role-play. Fill in the blanks as you see fit!",
     "Now that we know a little more about your character, all that's left is to give them a name!"
   ]
 
@@ -81,6 +81,9 @@ angular.module 'miriClientServerApp'
 
     $scope.trait_tracker[category] = trait
 
+  $scope.selectBackground = (bg) ->
+    $scope.character.background = bg
+
   Socket.send
     command: "newchar"
 
@@ -112,6 +115,12 @@ angular.module 'miriClientServerApp'
         t.category = val.name
         $scope.functional_traits[t.id] = t
         $scope.character.functional_traits.push t.id if t.required
+
+  $scope.$on "ws.charcreatebackgrounds", (e, m) ->
+    $scope.backgrounds = {}
+    _.each m.data, (val) ->
+      $scope.backgrounds[val.id] = val
+    $scope.character.background = _.sample(m.data).id unless $scope.character.background?
 
   $scope.$on "ws.charcreatestepup", (e, m) ->
     unless m.success

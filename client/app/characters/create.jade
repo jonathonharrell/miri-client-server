@@ -66,6 +66,12 @@
       .col-sm-2.cc-description.scrollable.end
         p The points tracker in the left column indicates your point deficit. Adding positive traits will decrease your point deficit, 
           | and adding negative ones will increase it. In order for a character to be valid, your point deficit must be greater then or equal to zero.
+          
+    .row.char-create(ng-show='step === 4')
+      .col-sm-1
+      .col-sm-10
+        p(ng-repeat="(id, bg) in backgrounds") {{bg.name}} {{bg.description}}
+    
     .row
       .col-sm-2
         a(ng-show='step !== 0', ng-click='step_back()')
