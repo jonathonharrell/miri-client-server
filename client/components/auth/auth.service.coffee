@@ -23,7 +23,7 @@ angular.module 'miriClientServerApp'
   # Delete access token and user info
   logout: ->
     $http.get 'http://' + ENV.api + '/logout'
-    .then(res) ->
+    .then (res) ->
       $cookieStore.remove 'token'
       currentUser = null
 

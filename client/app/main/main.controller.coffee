@@ -22,3 +22,6 @@ angular.module 'miriClientServerApp'
     $scope.admin_form.args = undefined
 
   $scope.auth = Auth
+
+  $scope.logout = ->
+    Auth.logout()
