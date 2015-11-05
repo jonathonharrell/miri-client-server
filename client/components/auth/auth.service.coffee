@@ -21,11 +21,12 @@ angular.module 'miriClientServerApp'
       $q.reject ["Invalid email or password."]
 
   # Delete access token and user info
-  logout: ->
+  logout: (callback) ->
     $http.get 'http://' + ENV.api + '/logout'
     .then (res) ->
       $cookieStore.remove 'token'
       currentUser = null
+      callback?()
 
   # Create a new user
   createUser: (user, callback) ->

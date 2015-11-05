@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'MainCtrl', ($scope, $rootScope, Socket, Auth) ->
+.controller 'MainCtrl', ($scope, $rootScope, $state, Socket, Auth) ->
   $scope.msgs = []
   $scope.admin_form =
     args: undefined
@@ -24,4 +24,5 @@ angular.module 'miriClientServerApp'
   $scope.auth = Auth
 
   $scope.logout = ->
-    Auth.logout()
+    Auth.logout ->
+      $state.go "main.login"
