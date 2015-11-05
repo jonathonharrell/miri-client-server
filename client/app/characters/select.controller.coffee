@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'CharacterSelectCtrl', ($scope, Socket) ->
+.controller 'CharacterSelectCtrl', ($scope) ->
   $scope.characters = []
 
   Socket.send

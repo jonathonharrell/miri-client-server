@@ -1,26 +1,26 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'SignupCtrl', ($scope, $rootScope, Auth, Socket) ->
+.controller 'SignupCtrl', ($scope, Auth, $state) ->
   $scope.user =
     email: ''
     password: ''
 
-  $scope.register = ->
+  $scope.user = {}
+  $scope.errors = []
+  $scope.register = (form) ->
     $scope.submitted = true
-    Socket.send
-      command: "createuser"
-      args: $scope.user
 
-  $scope.$on "ws.createuser", (e, m) ->
-    if m.success
-      Auth.authenticate m
-    else
-      $scope.errors =
-        email: []
-        password: []
+    if form.$valid
+      Auth.createUser $scope.user
+      .then ->
+        $state.go "main.character_select"
 
-      _.each m.errors, (err) ->
-        $scope.errors.email.push    err if err.toLowerCase().indexOf("email")    > -1
-        $scope.errors.password.push err if err.toLowerCase().indexOf("password") > -1
-      $scope.$apply()
+      .catch (err) ->
+        $scope.errors =
+          email: []
+          password: []
+
+        _.each err, (e) ->
+          $scope.errors.email.push    e if e.toLowerCase().indexOf("email")    > -1
+          $scope.errors.password.push e if e.toLowerCase().indexOf("password") > -1
