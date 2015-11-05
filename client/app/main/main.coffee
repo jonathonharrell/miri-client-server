@@ -12,43 +12,43 @@ angular.module 'miriClientServerApp'
   .state 'main.connecting',
     url: 'connecting'
     controller: 'ConnectingCtrl'
-    templateUrl: 'app/main/connecting.html'
+    templateUrl: 'app/main/connect/connecting.html'
     authenticate: true
 
   .state 'main.login',
     url: 'login'
-    templateUrl: 'app/auth/login.html'
+    templateUrl: 'app/account/login/login.html'
     controller: 'LoginCtrl'
 
   .state 'main.signup',
     url: 'signup'
-    templateUrl: 'app/auth/signup.html'
+    templateUrl: 'app/account/signup/signup.html'
     controller: 'SignupCtrl'
 
   .state 'main.forgot_password',
     url: 'forgot_password'
-    templateUrl: 'app/auth/forgot_password.html'
+    templateUrl: 'app/account/forgot_password/forgot_password.html'
     controller: 'ForgotPasswordCtrl'
 
   .state 'main.reset_password',
     url: 'reset_password'
-    templateUrl: 'app/main.reset_password.html'
+    templateUrl: 'app/account/reset_password/reset_password.html'
     controller: 'ResetPasswordCtrl'
 
   .state 'main.account',
     url: 'account'
-    templateUrl: 'app/main.account.html'
+    templateUrl: 'app/account/settings/settings.html'
     controller: 'AccountCtrl'
     authenticate: true
 
   .state 'main.character_create',
     url: 'characters/create'
-    templateUrl: 'app/characters/create.html'
+    templateUrl: 'app/characters/create/create.html'
     controller: 'CharacterCreateCtrl'
     authenticate: true
 
   .state 'main.character_select',
     url: 'characters'
-    templateUrl: 'app/characters/select.html'
+    templateUrl: 'app/characters/select/select.html'
     controller: 'CharacterSelectCtrl'
     authenticate: true
