@@ -3,10 +3,11 @@
 angular.module 'miriClientServerApp'
 .factory 'Auth', ($http, $cookieStore, $q, ENV) ->
   currentUser = $cookieStore.get 'token'
+  api = window.location.protocol + '//' + ENV.api
 
   # Authenticate user and save token
   login: (user, callback) ->
-    $http.post 'http://' + ENV.api + '/login',
+    $http.post api + '/login',
       email: user.email
       password: user.password
 
@@ -22,7 +23,7 @@ angular.module 'miriClientServerApp'
 
   # Delete access token and user info
   logout: (callback) ->
-    $http.get 'http://' + ENV.api + '/logout'
+    $http.get api + '/logout'
     .then (res) ->
       $cookieStore.remove 'token'
       currentUser = null
@@ -30,7 +31,7 @@ angular.module 'miriClientServerApp'
 
   # Create a new user
   createUser: (user, callback) ->
-    $http.post 'http://' + ENV.api + '/signup',
+    $http.post api + '/signup',
       email: user.email
       password: user.password
 
