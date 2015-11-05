@@ -1,23 +1,21 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'LoginCtrl', ($scope, Auth, Socket) ->
-  $scope.user =
-    email: ''
-    password: ''
-
-  $scope.login = ->
+.controller 'LoginCtrl', ($scope, Auth, $state) ->
+  $scope.user = {}
+  $scope.errors = []
+  $scope.login = (form) ->
     $scope.submitted = true
-    Socket.send
-      command: "authenticate"
-      args: $scope.user
 
-  $scope.$on "ws.authenticate", (e, m) ->
-    if m.success
-      Auth.authenticate m
-    else
-      $scope.errors = []
+    if form.$valid
+      # Logged in, redirect to home
+      Auth.login
+        email: $scope.user.email
+        password: $scope.user.password
 
-      _.each m.errors, (err) ->
-        $scope.errors.push err
-      $scope.$apply()
+      .then ->
+        $state.go "main.character_select"
+
+      .catch (err) ->
+        console.log err
+        $scope.errors = err

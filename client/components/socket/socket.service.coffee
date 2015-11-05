@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.service 'Socket', ($rootScope) ->
+.service 'Socket', ($rootScope, ENV) ->
   class SocketService
     @ws: null
 
@@ -21,7 +21,7 @@ angular.module 'miriClientServerApp'
 
         @ws.onmessage = (m) ->
           msg = JSON.parse m.data
-          
+
           # @todo temporary
           console.log msg
 

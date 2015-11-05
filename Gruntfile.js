@@ -14,6 +14,7 @@ module.exports = function (grunt) {
     express: 'grunt-express-server',
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
+    ngconstant: 'grunt-ng-constant',
     cdnify: 'grunt-google-cdn',
     protractor: 'grunt-protractor-runner',
     buildcontrol: 'grunt-build-control'
@@ -115,9 +116,9 @@ module.exports = function (grunt) {
         files: [
           '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.css',
           '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.html',
-          
+
           '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
-          
+
           '!{.tmp,<%= yeoman.client %>}{app,components}/**/*.spec.js',
           '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js',
           '<%= yeoman.client %>/assets/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}'
@@ -323,6 +324,38 @@ module.exports = function (grunt) {
           src: '**/*.js',
           dest: '.tmp/concat'
         }]
+      }
+    },
+
+    ngconstant: {
+      // Options for all targets
+      options: {
+        space: '  ',
+        wrap: '"use strict";\n\n {%= __ngModule %}',
+        name: 'config',
+      },
+      // Environment targets
+      development: {
+        options: {
+          dest: '<%= yeoman.client %>/scripts/config.js'
+        },
+        constants: {
+          ENV: {
+            name: 'development',
+            api: 'localhost:8080'
+          }
+        }
+      },
+      production: {
+        options: {
+          dest: '<%= yeoman.client %>/scripts/config.js'
+        },
+        constants: {
+          ENV: {
+            name: 'production',
+            api: 'http://api.minimiri.com'
+          }
+        }
       }
     },
 
@@ -564,12 +597,12 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.client %>/index.html': [
                [
-                 
+
                  '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
-                 
-                 '!{.tmp,<%= yeoman.client %>}/app/app.js',               
+
+                 '!{.tmp,<%= yeoman.client %>}/app/app.js',
                  '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
-                 '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js'               
+                 '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js'
                ]
             ]
         }
@@ -610,7 +643,7 @@ module.exports = function (grunt) {
             '<%= yeoman.client %>/{app,components}/**/*.css'
           ]
         }
-      }
+      },
     },
   });
 
@@ -639,7 +672,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:stylus', 
+        'injector:stylus',
         'concurrent:server',
         'injector',
         'wiredep',
@@ -651,7 +684,8 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'env:all',
-      'injector:stylus', 
+      'ngconstant:development',
+      'injector:stylus',
       'concurrent:server',
       'injector',
       'wiredep',
@@ -681,7 +715,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:stylus', 
+        'injector:stylus',
         'concurrent:test',
         'injector',
         'autoprefixer',
@@ -694,7 +728,7 @@ module.exports = function (grunt) {
         'clean:server',
         'env:all',
         'env:test',
-        'injector:stylus', 
+        'injector:stylus',
         'concurrent:test',
         'injector',
         'wiredep',
@@ -712,8 +746,9 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'injector:stylus', 
+    'injector:stylus',
     'concurrent:dist',
+    'ngconstant:production',
     'injector',
     'wiredep',
     'useminPrepare',

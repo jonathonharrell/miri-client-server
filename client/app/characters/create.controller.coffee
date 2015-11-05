@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'CharacterCreateCtrl', ($scope, $state, Auth, UserStates, Socket) ->
+.controller 'CharacterCreateCtrl', ($scope, $state, Auth, Socket) ->
   $scope.step = 0
   $scope.step_titles = ['Race', 'Gender', 'Appearance', 'Traits', 'Background', 'Name']
   $scope.step_descriptions = [

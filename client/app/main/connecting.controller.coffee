@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'ConnectingCtrl', ($scope, $interval, $timeout, $state, Auth, UserStates, Socket) ->
+.controller 'ConnectingCtrl', ($scope, $interval, $timeout, $state, Auth, Socket) ->
   connect_failure = 0
   $scope.messages = []
 
