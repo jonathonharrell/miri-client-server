@@ -12,7 +12,7 @@ angular.module 'miriClientServerApp'
   .state 'main.connecting',
     url: 'connecting'
     controller: 'ConnectingCtrl'
-    templateUrl: 'app/main/connect/connecting.html'
+    templateUrl: 'app/main/connect/connect.html'
     authenticate: true
 
   .state 'main.login',
@@ -27,12 +27,12 @@ angular.module 'miriClientServerApp'
 
   .state 'main.forgot_password',
     url: 'forgot_password'
-    templateUrl: 'app/account/forgot_password/forgot_password.html'
+    templateUrl: 'app/account/forgotPassword/forgotPassword.html'
     controller: 'ForgotPasswordCtrl'
 
   .state 'main.reset_password',
     url: 'reset_password'
-    templateUrl: 'app/account/reset_password/reset_password.html'
+    templateUrl: 'app/account/resetPassword/resetPassword.html'
     controller: 'ResetPasswordCtrl'
 
   .state 'main.account',
