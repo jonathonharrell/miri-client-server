@@ -1,0 +1,36 @@
+.overlay
+  .miri-panel
+    a.left(ui-sref="main") back
+    .inner-panel
+      h1 Reset Password
+      hr
+    .inner-panel
+      form.form(name='pwdForm', role='form', ng-submit='changePassword(pwdForm)', novalidate='')
+        .form-group(ng-class='{ "has-success": pwdForm.password.$valid && pwdSubmitted,\
+        "has-error": !pwdForm.password.$valid && pwdSubmitted }')
+          label(for="oldPass") Current Password
+          input.form-control#oldPass(type='password', name='password', ng-model='user.oldPassword', mongoose-error='', required='')
+          p.help-block(ng-show='pwdForm.password.$error.required && pwdSubmitted')
+            | Please enter your password.
+          p.help-block(ng-show='pwdForm.password.$error.mongoose')
+            | {{ errors.other }}
+        .form-group(ng-class='{ "has-success": pwdForm.newPassword.$valid && pwdSubmitted,\
+        "has-error": !pwdForm.newPassword.$valid && pwdSubmitted }')
+          label(for="newPass") New Password
+          .row
+            .col-sm-7
+              input.form-control#newPass(type='password', name='newPassword', ng-model='user.newPassword', ng-minlength='3', required='', ng-show="!showPassword")
+              input.form-control(type='text', ng-model='user.newPassword', ng-show="showPassword")
+            .col-sm-5
+              div(password-strength="user.newPassword || ''")
+          p.help-block(ng-show='(pwdForm.newPassword.$error.minlength || pwdForm.newPassword.$error.required) && (pwdForm.newPassword.$dirty || pwdSubmitted)')
+            | Password must be at least 3 characters.
+        .checkbox
+          label(for="showPassword")
+            input#showPassword(type="checkbox", ng-model="showPassword")
+            | Show Password
+
+
+        p.help-block.has-success {{ pwdMessage }}
+
+        button.btn.btn-lg.btn-primary(type='submit') Save

@@ -37,7 +37,7 @@ angular.module 'miriClientServerApp'
 
   .state 'main.account',
     url: 'account'
-    templateUrl: 'app/account/settings/settings.html'
+    templateUrl: 'app/account/settings/account.html'
     controller: 'AccountCtrl'
     authenticate: true
 
