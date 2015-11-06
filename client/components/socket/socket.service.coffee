@@ -1,13 +1,13 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.service 'Socket', ($rootScope, ENV) ->
+.service 'Socket', ($rootScope, ENV, $cookieStore) ->
   class SocketService
     @ws: null
 
     @connect: (callback) ->
       if window["WebSocket"]
-        @ws = new WebSocket("ws://" + ENV.api)
+        @ws = new WebSocket("ws://" + ENV.api + "?access_token=" + $cookieStore.get 'token')
 
         self = @
         @ws.onclose = (e) ->

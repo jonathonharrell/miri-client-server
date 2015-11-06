@@ -29,6 +29,6 @@ angular.module 'miriClientServerApp'
 
     Socket.connect (m) ->
       $scope.loading_message = m
-      $state.go 'main.character_select'
+      $state.go 'main.characterSelect'
 
   $scope.connect()
