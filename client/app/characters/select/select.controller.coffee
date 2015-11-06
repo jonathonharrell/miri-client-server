@@ -1,18 +1,13 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'CharacterSelectCtrl', ($scope) ->
+.controller 'CharacterSelectCtrl', ($scope, $http, ENV) ->
+  api = window.location.protocol + '//' + ENV.api
   $scope.characters = []
 
-  Socket.send
-    command: "charlist"
-
-  $scope.$on "ws.charlist", (e, m) ->
-    _.each m.data, (v, i) ->
-      if v is null
-        $scope.characters[i] = null
-      else
-        $scope.characters[i] = v
+  $http.get api + '/characters/list'
+  .then (res) ->
+    console.log res.data
 
   $scope.select_character = (id) ->
     console.log id
