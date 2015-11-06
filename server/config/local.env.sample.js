@@ -7,7 +7,7 @@
 
 module.exports = {
   DOMAIN:           'http://localhost:9000',
-  SESSION_SECRET:   'miriclientserver-secret',
+  SESSION_SECRET:   'i23k8jnTghdfadGGrt32hgSGH42zSD53HaraaR48990A',
 
   // Control debug level for modules using visionmedia/debug
   DEBUG: ''
