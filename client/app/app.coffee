@@ -39,9 +39,10 @@ angular.module 'miriClientServerApp', [
 .run ($rootScope, Auth, $state) ->
   # Redirect to login if route requires auth and you're not logged in
   $rootScope.$on '$stateChangeStart', (event, next) ->
-    if next.authenticate and not Auth.getCurrentUser() and next.name isnt "main.login"
-      event.preventDefault()
-      $state.go "main.login"
+    Auth.isLoggedIn (loggedIn) ->
+      if next.authenticate and not loggedIn and next.name isnt "login"
+        event.preventDefault()
+        $state.go "main.login"
 
     nanobar.go 30
 
