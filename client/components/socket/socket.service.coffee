@@ -7,7 +7,7 @@ angular.module 'miriClientServerApp'
 
     @connect: (callback) ->
       if window["WebSocket"]
-        @ws = new WebSocket("ws://localhost:8080")
+        @ws = new WebSocket("ws://" + ENV.api)
 
         self = @
         @ws.onclose = (e) ->
@@ -34,5 +34,8 @@ angular.module 'miriClientServerApp'
 
     @send: (msg) ->
       @ws.send JSON.stringify(msg)
+
+    @disconnect: ->
+      @ws.disconnect()
 
   return SocketService

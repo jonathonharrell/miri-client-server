@@ -1,26 +1,32 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'SignupCtrl', ($scope, Auth, $state) ->
-  $scope.user =
-    email: ''
-    password: ''
-
+.controller 'SignupCtrl', ($scope, Auth, $state, Static) ->
   $scope.user = {}
-  $scope.errors = []
+  $scope.errors = {}
+
   $scope.register = (form) ->
     $scope.submitted = true
 
     if form.$valid
-      Auth.createUser $scope.user
-      .then ->
-        $state.go "main.character_select"
+      # check if the user agrees to the terms
+      Static.open 'terms-agree'
+      .then (agreed) ->
+        return unless agreed
 
-      .catch (err) ->
-        $scope.errors =
-          email: []
-          password: []
+        Auth.createUser
+          email: $scope.user.email
+          password: $scope.user.password
 
-        _.each err, (e) ->
-          $scope.errors.email.push    e if e.toLowerCase().indexOf("email")    > -1
-          $scope.errors.password.push e if e.toLowerCase().indexOf("password") > -1
+        .then ->
+          # Account created, redirect to home
+          $state.go "main.connect"
+
+        .catch (err) ->
+          err = err.data
+          $scope.errors = {}
+
+          # Update validity of form fields that match the mongoose errors
+          angular.forEach err.errors, (error, field) ->
+            form[field].$setValidity 'mongoose', false
+            $scope.errors[field] = error.message

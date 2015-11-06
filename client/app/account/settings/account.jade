@@ -2,7 +2,24 @@
   .miri-panel
     a.left(ui-sref="main") back
     .inner-panel
-      h1 Reset Password
+      h1 Change Email
+      hr
+    .inner-panel
+      form.form(role='form', name='emailForm', ng-submit='changeEmail(emailForm)', novalidate='')
+        .form-group(ng-class='{ "has-success": emailForm.email.$valid && emailSubmitted,\
+        "has-error": (emailForm.email.$error.mongoose || emailForm.email.$error.required || emailForm.email.$error.email ) && emailSubmitted }')
+          label(for="email") New Email
+          input.form-control#email(type='email', name='email', ng-model='user.email', placeholder='ex. me@awesome.com', mongoose-error='', required='')
+          p.help-block(ng-show='(emailForm.email.$error.required || emailForm.email.$error.email) && emailSubmitted && !emailForm.email.$error.mongoose')
+            | Email not valid
+          p.help-block(ng-show='emailForm.email.$error.mongoose')
+            | {{ errors.email }}
+
+        p.help-block  {{ emailMessage }}
+        button.btn.btn-lg.btn-primary(type='submit') Save
+        div(style="padding-bottom:30px")
+    .inner-panel
+      h1 Change Password
       hr
     .inner-panel
       form.form(name='pwdForm', role='form', ng-submit='changePassword(pwdForm)', novalidate='')

@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'ConnectingCtrl', ($scope, $interval, $timeout, $state, Auth, Socket) ->
+.controller 'ConnectCtrl', ($scope, $interval, $timeout, $state, Socket) ->
   connect_failure = 0
   $scope.messages = []
 
@@ -29,7 +29,6 @@ angular.module 'miriClientServerApp'
 
     Socket.connect (m) ->
       $scope.loading_message = m
-      Auth.state = UserStates.NotAuthenticated.name
-      $state.go UserStates[Auth.state].defaultState
+      $state.go 'main.character_select'
 
   $scope.connect()

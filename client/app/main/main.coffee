@@ -9,9 +9,9 @@ angular.module 'miriClientServerApp'
     controller: 'MainCtrl'
     authenticate: true
 
-  .state 'main.connecting',
-    url: 'connecting'
-    controller: 'ConnectingCtrl'
+  .state 'main.connect',
+    url: 'connect'
+    controller: 'ConnectCtrl'
     templateUrl: 'app/main/connect/connect.html'
     authenticate: true
 
@@ -25,13 +25,13 @@ angular.module 'miriClientServerApp'
     templateUrl: 'app/account/signup/signup.html'
     controller: 'SignupCtrl'
 
-  .state 'main.forgot_password',
+  .state 'main.forgotPassword',
     url: 'forgot_password'
     templateUrl: 'app/account/forgotPassword/forgotPassword.html'
     controller: 'ForgotPasswordCtrl'
 
-  .state 'main.reset_password',
-    url: 'reset_password'
+  .state 'main.resetPassword',
+    url: 'reset_password/:resetToken'
     templateUrl: 'app/account/resetPassword/resetPassword.html'
     controller: 'ResetPasswordCtrl'
 
@@ -41,14 +41,21 @@ angular.module 'miriClientServerApp'
     controller: 'AccountCtrl'
     authenticate: true
 
-  .state 'main.character_create',
+  .state 'main.characterCreate',
     url: 'characters/create'
     templateUrl: 'app/characters/create/create.html'
     controller: 'CharacterCreateCtrl'
     authenticate: true
 
-  .state 'main.character_select',
+  .state 'main.characterSelect',
     url: 'characters'
     templateUrl: 'app/characters/select/select.html'
     controller: 'CharacterSelectCtrl'
     authenticate: true
+
+  .state 'main.logout',
+    url: '/logout'
+    controller: ($state, Auth) ->
+      # socketProvider.disconnect() @todo
+      Auth.logout()
+      $state.go 'main.login'
