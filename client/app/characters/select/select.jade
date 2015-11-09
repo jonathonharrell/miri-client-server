@@ -9,7 +9,7 @@
         .character-box(ng-switch='n')
           span(ng-switch-when='undefined')
             h4 Empty
-            a.btn.play-btn.btn-primary.btn-lg(ui-sref='main.character_create') Create
+            a.btn.play-btn.btn-primary.btn-lg(ui-sref='main.characterCreate') Create
           span(ng-switch-default='')
             h4 {{ n.name }}
             trait(trait-icon='n')

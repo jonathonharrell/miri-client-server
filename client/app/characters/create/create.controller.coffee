@@ -2,6 +2,8 @@
 
 angular.module 'miriClientServerApp'
 .controller 'CharacterCreateCtrl', ($scope, $state, Auth, Socket) ->
+  $state.go 'main.connect' unless Socket.connected()
+
   $scope.step = 0
   $scope.step_titles = ['Race', 'Gender', 'Appearance', 'Traits', 'Background', 'Name']
   $scope.step_descriptions = [
@@ -85,14 +87,14 @@ angular.module 'miriClientServerApp'
     $scope.character.background = bg
 
   Socket.send
-    command: "newchar"
+    command: "options"
+    args:
+      get: "races"
 
-  Socket.send
-    command: "charcreate"
-
-  $scope.$on "ws.charcreateraces", (e, m) ->
+  $scope.$on "ws.msg", (e, m) ->
     nanobar.go 100 if $scope.character.race?
-    _.each m.data, (val) ->
+    $scope.races[m["HUMAN"].id] = m['HUMAN']
+    _.each m, (val) ->
       $scope.races[val.id] = val
     $scope.character.race = $scope.races['HUMAN'].id unless $scope.character.race?
 
