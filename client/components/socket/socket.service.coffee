@@ -9,7 +9,6 @@ angular.module 'miriClientServerApp'
       if window["WebSocket"]
         @ws = new WebSocket("ws://" + ENV.api + "?access_token=" + $cookieStore.get 'token')
 
-        self = @
         @ws.onclose = (e) ->
           if e.code is 1006
             $rootScope.$broadcast 'ws.unexpected_close', 'The connection was closed abnormally, the server may be down for maintanence.'
@@ -20,17 +19,15 @@ angular.module 'miriClientServerApp'
           callback "Connected"
 
         @ws.onmessage = (m) ->
-          msg = JSON.parse m.data
+          msg = if m.data then JSON.parse(m.data) else null
 
-          # @todo temporary
-          console.log msg
+          console.log msg # @todo temporary
 
-          eventName = if msg.response_to.length > 0 then msg.response_to else "general_message"
-          $rootScope.$broadcast 'ws.' + msg.response_to, msg
+          $rootScope.$broadcast 'ws.msg', msg
       return
 
     @connected: ->
-      @ws["send"]
+      @ws != null
 
     @send: (msg) ->
       @ws.send JSON.stringify(msg)
