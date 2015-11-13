@@ -72,7 +72,12 @@
     .row.char-create(ng-show='step === 4')
       .col-sm-1
       .col-sm-10
-        p(ng-repeat="(id, bg) in backgrounds") {{bg.name}} {{bg.description}}
+        .row
+          .col-sm-4.cc-gender(ng-repeat='(id, bg) in backgrounds')
+            h4 
+              | {{bg.name}}
+              br/
+              small {{bg.description}}
         
     .row.char-create(ng-show='step === 5')
       .col-sm-4

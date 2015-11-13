@@ -21,8 +21,12 @@ angular.module 'miriClientServerApp'
   $scope.aesthetic_trait_categories  = {}
   $scope.functional_trait_categories = {}
   $scope.point_deficit = 0
+  $scope.errors = []
   $scope.backgrounds = {}
   $scope.description = {}
+  for_validation =
+    aesthetic_traits:  []
+    functional_traits: []
 
   $scope.character =
     race: null
@@ -37,11 +41,10 @@ angular.module 'miriClientServerApp'
 
   $scope.step_forward = ->
     $scope.step += 1
-    # @todo also validate here
     getGenders() if $scope.step is 1
     getAestheticTraits() if $scope.step is 2
-    getFunctionalTraits() if $scope.step is 3
-    getBackgrounds() if $scope.step is 4
+    getFunctionalTraits() if $scope.step is 3 and validate('aesthetic_traits')
+    getBackgrounds() if $scope.step is 4 and validate('functional_traits')
 
   $scope.step_back = ->
     $scope.character.name = null              if $scope.step <= 5
@@ -91,8 +94,25 @@ angular.module 'miriClientServerApp'
       $scope.point_deficit -= Number($scope.trait_tracker[category].points)
       $scope.character.functional_traits[category].splice index, 1
 
-  $scope.selectBackground = (bg) ->
-    $scope.character.background = bg
+  validate = (type) ->
+    $scope.errors = []
+    categories =
+      aesthetic_traits: 'aesthetic_trait_categories'
+      functional_traits: 'functional_trait_categories'
+    valid = true
+
+    _.each $scope[categories[type]], (c) ->
+      exists = $scope.character[type][c.id]?
+      if c.min > 0 and !exists
+        valid = false
+        $scope.errors.push c.name + ' requires at least ' + c.min + ' selection.'
+      if exists
+        if c.min > 0 and $scope.character[type][c.id].length < c.min
+          valid = false
+          $scope.errors.push c.name + ' requires at least ' + c.min + ' selections.'
+
+    $scope.step -= 1 unless valid
+    valid
 
   $scope.$on 'ws.msg', (e, m) ->
     $scope.handler(e, m)
@@ -123,14 +143,15 @@ angular.module 'miriClientServerApp'
 
   getAestheticTraits = ->
     $scope.handler = (event, result) ->
+      result = $filter('traits')(result, $scope.character)
       $scope.aesthetic_trait_categories = result
     get "aesthetic_traits"
 
   getFunctionalTraits = ->
     $scope.point_deficit = 0
     $scope.handler = (event, result) ->
-      $scope.functional_trait_categories = result
       result = $filter('traits')(result, $scope.character)
+      $scope.functional_trait_categories = result
       _.each result, (val) ->
         traits = $filter('traits')(val.traits, $scope.character)
         _.each traits, (t) ->
