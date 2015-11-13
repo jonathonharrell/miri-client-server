@@ -30,7 +30,7 @@ angular.module 'miriClientServerApp'
       @ws != null
 
     @send: (msg) ->
-      @ws.send JSON.stringify(msg)
+      @ws.send JSON.stringify(msg) if @ws?
 
     @disconnect: ->
       @ws.disconnect()

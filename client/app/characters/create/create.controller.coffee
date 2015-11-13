@@ -6,6 +6,7 @@ angular.module 'miriClientServerApp'
 
   $scope.step = 0
   $scope.step_titles = ['Race', 'Gender', 'Appearance', 'Traits', 'Background', 'Name']
+  $scope.step_options = ['races', 'genders', 'aesthetic_traits', 'functional_traits', 'backgrounds']
   $scope.step_descriptions = [
     "Your choice of race determines your available aesthetic and trait options, as well as potential backgrounds and factions. Some races are more well-received then others in The Miri.",
     "Your choice of gender will affect a few aesthetic options as well as backgrounds, but has no effect on attributes.",
@@ -28,8 +29,8 @@ angular.module 'miriClientServerApp'
   $scope.character =
     race: null
     gender: null
-    aesthetic_traits: []
-    functional_traits: []
+    aesthetic_traits: {}
+    functional_traits: {}
     background: null
     name: null
 
@@ -37,102 +38,14 @@ angular.module 'miriClientServerApp'
     $scope.character[key] = val if $scope.character[key]?
 
   $scope.step_forward = ->
-    Socket.send
-      command: "charcreate"
-      args: $scope.character
-    nanobar.go 30
+    $scope.step += 1
+    # @todo also validate here
+    getGenders() if $scope.step is 1
+    getAestheticTraits() if $scope.step is 2
+    getFunctionalTraits() if $scope.step is 3
+    getBackgrounds() if $scope.step is 4
 
   $scope.step_back = ->
-    Socket.send
-      command: "charcreatestepback"
-    nanobar.go 30
-
-  $scope.selectAestheticTrait = (trait, category) ->
-    index = $scope.character.aesthetic_traits.indexOf trait.id
-
-    if $scope.trait_tracker[category] and $scope.aesthetic_trait_categories[category].unique
-      unless $scope.trait_tracker[category] is trait.id
-        $scope.character.aesthetic_traits.splice $scope.character.aesthetic_traits.indexOf($scope.trait_tracker[category]), 1
-        delete $scope.description[$scope.trait_tracker[category]]
-
-    if index is -1 and $scope.trait_tracker[category] isnt trait.id
-      $scope.character.aesthetic_traits.push trait.id
-      $scope.description[trait.id] = trait.description
-
-    if index > -1 and !$scope.aesthetic_trait_categories[category].unique
-      $scope.character.aesthetic_traits.splice index, 1
-      delete $scope.description[trait.id]
-
-    $scope.trait_tracker[category] = trait.id
-
-  $scope.selectFunctionalTrait = (trait, category) ->
-    index = $scope.character.functional_traits.indexOf trait.id
-
-    if $scope.trait_tracker[category] and $scope.functional_trait_categories[category].unique
-      unless $scope.trait_tracker[category] is trait
-        $scope.character.functional_traits.splice $scope.character.functional_traits.indexOf($scope.trait_tracker[category]), 1
-        $scope.point_deficit -= Number($scope.trait_tracker[category].points)
-
-    if index is -1 and $scope.trait_tracker[category] isnt trait
-      $scope.character.functional_traits.push trait.id
-      $scope.point_deficit += Number(trait.points)
-
-    if index > -1 and !$scope.functional_trait_categories[category].unique
-      $scope.character.functional_traits.splice index, 1
-      $scope.point_deficit -= Number(trait.points)
-
-    $scope.trait_tracker[category] = trait
-
-  $scope.selectBackground = (bg) ->
-    $scope.character.background = bg
-
-  Socket.send
-    command: "options"
-    args:
-      get: "races"
-
-  $scope.$on "ws.msg", (e, m) ->
-    nanobar.go 100 if $scope.character.race?
-    $scope.races[m["HUMAN"].id] = m['HUMAN']
-    _.each m, (val) ->
-      $scope.races[val.id] = val
-    $scope.character.race = $scope.races['HUMAN'].id unless $scope.character.race?
-
-  $scope.$on "ws.charcreategenders", (e, m) ->
-    $scope.genders = {}
-    _.each m.data, (val) ->
-      $scope.genders[val.id] = val
-    $scope.character.gender = _.sample(m.data).id unless $scope.character.gender?
-
-  $scope.$on "ws.charcreateaesthetic", (e, m) ->
-    $scope.aesthetic_trait_categories = {}
-    _.each m.data, (val) ->
-      $scope.aesthetic_trait_categories[val.id] = val
-
-  $scope.$on "ws.charcreatefunctional", (e, m) ->
-    $scope.functional_trait_categories = {}
-    _.each m.data, (val) ->
-      $scope.functional_trait_categories[val.id] = val
-      _.each val.traits, (t) ->
-        t.category = val.name
-        $scope.functional_traits[t.id] = t
-        $scope.character.functional_traits.push t.id if t.required
-
-  $scope.$on "ws.charcreatebackgrounds", (e, m) ->
-    $scope.backgrounds = {}
-    _.each m.data, (val) ->
-      $scope.backgrounds[val.id] = val
-    $scope.character.background = _.sample(m.data).id unless $scope.character.background?
-
-  $scope.$on "ws.charcreatestepup", (e, m) ->
-    unless m.success
-      $scope.errors = m.errors
-    else
-      $scope.errors = []
-      $scope.step += 1
-    nanobar.go 100
-
-  $scope.$on "ws.charcreatestepback", (e, m) ->
     $scope.character.name = null              if $scope.step <= 5
     $scope.character.background = null        if $scope.step <= 4
     $scope.character.functional_traits = []   if $scope.step <= 3
@@ -143,4 +56,92 @@ angular.module 'miriClientServerApp'
 
     $scope.errors = []
     $scope.step -= 1 if $scope.step > 0
-    nanobar.go 100
+
+  $scope.selectAestheticTrait = (trait, category) ->
+    $scope.character.aesthetic_traits[category] = [] unless $scope.character.aesthetic_traits[category]?
+    index = $scope.character.aesthetic_traits[category].indexOf trait.id
+    exists = index > -1
+    unique = $scope.aesthetic_trait_categories[category].unique
+
+    $scope.description[category] = [] if unique and !exists
+
+    unless exists
+      $scope.character.aesthetic_traits[category] = [] if unique
+      $scope.character.aesthetic_traits[category].push trait.id
+      $scope.description[category] = [] unless $scope.description[category]
+      $scope.description[category].push trait.description
+    else
+      return if unique
+      $scope.character.aesthetic_traits[category].splice index, 1
+      $scope.description[category].splice $scope.description[category].indexOf(trait.description), 1
+
+  $scope.selectFunctionalTrait = (trait, category) ->
+    $scope.character.functional_traits[category] = [] unless $scope.character.functional_traits[category]?
+    index = $scope.character.functional_traits[category].indexOf trait.id
+    exists = index > -1
+    unique = $scope.functional_trait_categories[category].unique
+
+    if unique and not exists and $scope.character.functional_traits[category].length > 0
+      point_modifier = $scope.functional_trait_categories[category].traits[$scope.character.functional_traits[category][0]].points
+      $scope.point_deficit -= Number(point_modifier)
+
+    unless exists
+      $scope.character.functional_traits[category] = [] if unique
+      $scope.character.functional_traits[category].push trait.id
+      $scope.point_deficit += Number(trait.points)
+    else
+      return if unique
+      $scope.point_deficit -= Number($scope.trait_tracker[category].points)
+      $scope.character.functional_traits[category].splice index, 1
+
+  $scope.selectBackground = (bg) ->
+    $scope.character.background = bg
+
+  $scope.$on 'ws.msg', (e, m) ->
+    $scope.handler(e, m)
+
+  get = (o) ->
+    Socket.send
+      command: "options"
+      args:
+        get: o
+
+  # @todo filter options
+  getRaces = ->
+    $scope.handler = (event, result) ->
+      $scope.races[result["HUMAN"].id] = result['HUMAN'] # set human first
+      delete result["HUMAN"]
+      _.each result, (val) ->
+        $scope.races[val.id] = val
+      $scope.character.race = $scope.races['HUMAN'].id unless $scope.character.race?
+
+    get "races"
+
+  getGenders = ->
+    $scope.handler = (event, result) ->
+      $scope.genders = result
+      $scope.character.gender = _.sample(result).id unless $scope.character.gender?
+
+    get "genders"
+
+  getAestheticTraits = ->
+    $scope.handler = (event, result) ->
+      $scope.aesthetic_trait_categories = result
+    get "aesthetic_traits"
+
+  getFunctionalTraits = ->
+    $scope.handler = (event, result) ->
+      $scope.functional_trait_categories = result
+      _.each result, (val) ->
+        _.each val.traits, (t) ->
+          $scope.character.functional_traits[val.id] = [] unless $scope.character.functional_traits[val.id]?
+          $scope.character.functional_traits[val.id].push t.id if t.required
+    get "functional_traits"
+
+  getBackgrounds = ->
+    $scope.handler = (event, result) ->
+      $scope.backgrounds = result
+      $scope.character.background = _.sample(result).id unless $scope.character.background?
+    get "backgrounds"
+
+  getRaces()

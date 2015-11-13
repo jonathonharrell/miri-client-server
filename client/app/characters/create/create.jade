@@ -33,11 +33,12 @@
       .col-sm-1
       .col-sm-2.cc-description.scrollable
         h4 Description
-        p(ng-repeat='(id, desc) in description') {{desc}}
+        span(ng-repeat='(id, category) in description') 
+          p(ng-repeat='desc in category') {{desc}}
       .col-sm-6.end
-        ul.list-inline(ng-repeat='(id, c) in aesthetic_trait_categories')
+        ul.list-inline(ng-repeat="(id, c) in aesthetic_trait_categories | aestheticTraits:character")
           h3 {{c.name}}
-          li(ng-repeat='t in c.traits', tooltip-html='"{{t.name}}<br />{{t.description}}"')
+          li(ng-repeat='t in c.traits | aestheticTraits:character', tooltip-html='"{{t.name}}<br />{{t.description}}"')
             label.rad(ng-if='c.unique')
               input(type='radio', name='{{c.id}}', ng-click='selectAestheticTrait(t, c.id)')
               trait.img(icon="t.image")
@@ -51,8 +52,9 @@
         p
           span.label(ng-class="{'label-danger': point_deficit <= -1, 'label-success': point_deficit >= 0}") {{point_deficit}} Points
         h4 Selected Traits
-        p(ng-repeat='t in character.functional_traits')
-          {{functional_traits[t].category}} - {{functional_traits[t].name}}
+        span(ng-repeat='(category, traits) in character.functional_traits')
+          p(ng-repeat='trait in traits')
+            {{functional_trait_categories[category].name}} - {{functional_trait_categories[category].traits[trait].name}}
       .col-sm-6
         ul.list-inline(ng-repeat='(id, c) in functional_trait_categories')
           h3 {{c.name}}
@@ -77,7 +79,7 @@
         a(ng-show='step !== 0', ng-click='step_back()')
           .previous-arrow
           .step-text Previous
-        a(ng-show='step === 0', ui-sref='main.character_select')
+        a(ng-show='step === 0', ui-sref='main.characterSelect')
           .previous-arrow
           .step-text Cancel
       .col-sm-8
