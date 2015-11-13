@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.filter 'aestheticTraits', ->
+.filter 'traits', ->
   return (items, character) ->
     filtered = []
 

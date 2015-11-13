@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'CharacterCreateCtrl', ($scope, $state, Auth, Socket) ->
+.controller 'CharacterCreateCtrl', ($scope, $state, Auth, Socket, $filter) ->
   $state.go 'main.connect' unless Socket.connected()
 
   $scope.step = 0
@@ -20,11 +20,9 @@ angular.module 'miriClientServerApp'
   $scope.genders = {}
   $scope.aesthetic_trait_categories  = {}
   $scope.functional_trait_categories = {}
-  $scope.functional_traits = {}
   $scope.point_deficit = 0
   $scope.backgrounds = {}
   $scope.description = {}
-  $scope.trait_tracker = {}
 
   $scope.character =
     race: null
@@ -48,9 +46,8 @@ angular.module 'miriClientServerApp'
   $scope.step_back = ->
     $scope.character.name = null              if $scope.step <= 5
     $scope.character.background = null        if $scope.step <= 4
-    $scope.character.functional_traits = []   if $scope.step <= 3
-    $scope.character.aesthetic_traits = []    if $scope.step <= 2
-    $scope.trait_tracker = {}                 if $scope.step <= 2
+    $scope.character.functional_traits = {}   if $scope.step <= 3
+    $scope.character.aesthetic_traits = {}    if $scope.step <= 2
     $scope.description = {}                   if $scope.step <= 2
     $scope.character.gender = null            if $scope.step <= 1
 
@@ -132,8 +129,10 @@ angular.module 'miriClientServerApp'
   getFunctionalTraits = ->
     $scope.handler = (event, result) ->
       $scope.functional_trait_categories = result
+      result = $filter('traits')(result, $scope.character)
       _.each result, (val) ->
-        _.each val.traits, (t) ->
+        traits = $filter('traits')(val.traits, $scope.character)
+        _.each traits, (t) ->
           $scope.character.functional_traits[val.id] = [] unless $scope.character.functional_traits[val.id]?
           $scope.character.functional_traits[val.id].push t.id if t.required
     get "functional_traits"

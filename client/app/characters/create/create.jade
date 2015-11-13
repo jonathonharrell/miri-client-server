@@ -36,9 +36,9 @@
         span(ng-repeat='(id, category) in description') 
           p(ng-repeat='desc in category') {{desc}}
       .col-sm-6.end
-        ul.list-inline(ng-repeat="(id, c) in aesthetic_trait_categories | aestheticTraits:character")
+        ul.list-inline(ng-repeat="(id, c) in aesthetic_trait_categories | traits:character")
           h3 {{c.name}}
-          li(ng-repeat='t in c.traits | aestheticTraits:character', tooltip-html='"{{t.name}}<br />{{t.description}}"')
+          li(ng-repeat='t in c.traits | traits:character', tooltip-html='"{{t.name}}<br />{{t.description}}"')
             label.rad(ng-if='c.unique')
               input(type='radio', name='{{c.id}}', ng-click='selectAestheticTrait(t, c.id)')
               trait.img(icon="t.image")
@@ -52,13 +52,13 @@
         p
           span.label(ng-class="{'label-danger': point_deficit <= -1, 'label-success': point_deficit >= 0}") {{point_deficit}} Points
         h4 Selected Traits
-        span(ng-repeat='(category, traits) in character.functional_traits')
-          p(ng-repeat='trait in traits')
-            {{functional_trait_categories[category].name}} - {{functional_trait_categories[category].traits[trait].name}}
+        span(ng-repeat='(id, cat) in character.functional_traits')
+          p(ng-repeat='trait in cat')
+            {{functional_trait_categories[id].name}} - {{functional_trait_categories[id].traits[trait].name}}
       .col-sm-6
-        ul.list-inline(ng-repeat='(id, c) in functional_trait_categories')
+        ul.list-inline(ng-repeat='(id, c) in functional_trait_categories | traits:character')
           h3 {{c.name}}
-          li(ng-repeat='t in c.traits', tooltip-html='"{{t.name}}<br />{{t.description}}"')
+          li(ng-repeat='t in c.traits | traits:character', tooltip-html='"{{t.name}}<br />{{t.description}}"')
             label.rad(ng-if='c.unique')
               input(type='radio', name='{{c.id}}', ng-click='selectFunctionalTrait(t, c.id)')
               trait.img(icon="t.image")
