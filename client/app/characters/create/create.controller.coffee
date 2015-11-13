@@ -127,6 +127,7 @@ angular.module 'miriClientServerApp'
     get "aesthetic_traits"
 
   getFunctionalTraits = ->
+    $scope.point_deficit = 0
     $scope.handler = (event, result) ->
       $scope.functional_trait_categories = result
       result = $filter('traits')(result, $scope.character)
