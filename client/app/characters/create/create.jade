@@ -73,6 +73,12 @@
       .col-sm-1
       .col-sm-10
         p(ng-repeat="(id, bg) in backgrounds") {{bg.name}} {{bg.description}}
+        
+    .row.char-create(ng-show='step === 5')
+      .col-sm-4
+      .col-sm-4
+        .form-group
+          input.form-control(type='text', name='name', ng-model='character.name')
     
     .row
       .col-sm-2
@@ -84,6 +90,8 @@
           .step-text Cancel
       .col-sm-8
       .col-sm-2
-        a.pull-right(ng-click='step_forward()')
+        a.pull-right(ng-show='step !== 5', ng-click='step_forward()')
           .step-text Next
           .next-arrow
+        a.pull-right.btn.btn-default(ng-show='step === 5', ng-click='create_character()')
+          | Create
