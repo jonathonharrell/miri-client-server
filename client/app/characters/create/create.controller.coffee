@@ -45,6 +45,8 @@ angular.module 'miriClientServerApp'
     getAestheticTraits() if $scope.step is 2
     getFunctionalTraits() if $scope.step is 3 and validate('aesthetic_traits')
     getBackgrounds() if $scope.step is 4 and validate('functional_traits')
+    $scope.errors.push 'You must select a background.' if $scope.step is 5 and not $scope.character.background?
+    # @todo validate name exists before submission
 
   $scope.step_back = ->
     $scope.character.name = null              if $scope.step <= 5
@@ -100,6 +102,10 @@ angular.module 'miriClientServerApp'
       aesthetic_traits: 'aesthetic_trait_categories'
       functional_traits: 'functional_trait_categories'
     valid = true
+
+    if $scope.point_deficit < 0
+      valid = false
+      $scope.errors.push 'You must have 0 or more points to continue.'
 
     _.each $scope[categories[type]], (c) ->
       exists = $scope.character[type][c.id]?

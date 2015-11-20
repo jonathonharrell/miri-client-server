@@ -8,6 +8,14 @@
         br
         p(ng-repeat='e in errors') 
           span.label.label-danger {{e}}
+    .row.text-center
+      .col-sm-12
+        h4
+          | {{character.name || '?'}}, 
+          | {{races[character.race].name}} 
+          | {{genders[character.gender].name || '?'}} - 
+          | {{backgrounds[character.background].name || '?'}}
+        br
     .row.char-create(ng-show='step === 0')
       .col-sm-1
       .col-sm-5.scrollable
@@ -73,7 +81,7 @@
       .col-sm-1
       .col-sm-10
         .row
-          .col-sm-4.cc-gender(ng-repeat='(id, bg) in backgrounds')
+          .col-sm-4.cc-gender(ng-repeat='(id, bg) in backgrounds', ng-class='{selected: character.background == id}', ng-click='select("background", id)')
             h4 
               | {{bg.name}}
               br/
