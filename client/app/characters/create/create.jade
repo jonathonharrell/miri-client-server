@@ -20,9 +20,9 @@
       .col-sm-1
       .col-sm-5.scrollable
         .row.cc-race(ng-repeat='(id, r) in races', ng-class='{selected: character.race == id}', ng-click='select("race", id)')
-          .col-sm-4
+          .col-sm-3
             img(src='http://placehold.it/100x100')
-          .col-sm-8
+          .col-sm-9
             h4
               | {{r.name}}
               small
@@ -81,11 +81,10 @@
       .col-sm-1
       .col-sm-10
         .row
-          .col-sm-4.cc-gender(ng-repeat='(id, bg) in backgrounds', ng-class='{selected: character.background == id}', ng-click='select("background", id)')
-            h4 
-              | {{bg.name}}
-              br/
-              small {{bg.description}}
+          .col-sm-4(ng-repeat='(id, bg) in backgrounds', ng-click='select("background", id)')
+            .cc-gender(ng-class='{selected: character.background == id}')
+              h4 {{bg.name}}
+              p.muted {{bg.description}}
         
     .row.char-create(ng-show='step === 5')
       .col-sm-4
