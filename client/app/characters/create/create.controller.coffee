@@ -46,7 +46,11 @@ angular.module 'miriClientServerApp'
     getFunctionalTraits() if $scope.step is 3 and validate('aesthetic_traits')
     getBackgrounds() if $scope.step is 4 and validate('functional_traits')
     $scope.errors.push 'You must select a background.' if $scope.step is 5 and not $scope.character.background?
-    # @todo validate name exists before submission
+
+  $scope.create_character = ->
+    $scope.errors = []
+    if validateName($scope.character.name)
+      console.log $scope.character
 
   $scope.step_back = ->
     $scope.character.name = null              if $scope.step <= 5
@@ -119,6 +123,26 @@ angular.module 'miriClientServerApp'
 
     $scope.step -= 1 unless valid
     valid
+
+  validateName = (name) ->
+    unless name and name.length >= 5
+      $scope.errors.push 'Name is not long enough.'
+      return false
+
+    num_spaces = name.split(" ").length - 1
+    if num_spaces < 1
+      $scope.errors.push 'You must have a first name and a surname / family name (last name).'
+      return false
+
+    if num_spaces > 1
+      $scope.errors.push 'You may only have a first name and a last name.'
+      return false
+
+    unless /^[a-zA-Z._-\s]+$/.test(name)
+      $scope.errors.push 'Invalid characters in name'
+      return false
+
+    true
 
   $scope.$on 'ws.msg', (e, m) ->
     $scope.handler(e, m)
