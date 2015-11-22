@@ -4,15 +4,23 @@ angular.module 'miriClientServerApp'
 .directive 'trait', ->
   restrict: 'EA'
   scope:
-    icon: '='
-    tTooltip: '='
+    trait: '=',
+    category: '='
   link: (scope, element) ->
+    traits = [
+      "HAIRCOLOR - BROWN",
+      "HAIRCOLOR - BLONDE",
+      "HAIRCOLOR - GREY",
+      "HAIRCOLOR - BLACK",
+    ]
+
+    icon = traits.indexOf(scope.category + ' - ' + scope.trait) + 1
     per = 16 # 512/32
-    row = Math.round((scope.icon - 1) / per)
-    column = (scope.icon - (row * 16) - 1) * 32
+    row = Math.round((icon - 1) / per)
+    column = (icon - (row * 16) - 1) * 32
     position = '-' + String(column) + 'px -' + String(row) + 'px'
 
-    unless scope.icon < 1 or scope.icon > 256
+    unless icon < 1 or icon > 256
       element.css
         background: 'url(\'/assets/images/traits.png\') ' + position + ' no-repeat'
     else
