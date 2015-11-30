@@ -53,6 +53,8 @@ angular.module 'miriClientServerApp'
       Socket.send
         command: "create"
         args: $scope.character
+      $scope.handler = (event, result) ->
+        # @todo handle incoming error messages or a success
 
   $scope.step_back = ->
     $scope.character.name = null              if $scope.step <= 5
