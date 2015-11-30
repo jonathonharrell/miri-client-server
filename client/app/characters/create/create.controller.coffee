@@ -133,13 +133,20 @@ angular.module 'miriClientServerApp'
     if num_spaces < 1
       $scope.errors.push 'You must have a first name and a surname / family name (last name).'
       return false
-
     if num_spaces > 1
       $scope.errors.push 'You may only have a first name and a last name.'
       return false
 
     unless /^[a-zA-Z._-\s]+$/.test(name)
       $scope.errors.push 'Invalid characters in name'
+      return false
+
+    name = name.split(" ")
+    if name[0].length < 2
+      $scope.errors.push 'First name must be two or more characters.'
+      return false
+    if name[1].length < 2
+      $scope.errors.push 'Last name must be two or more characters.'
       return false
 
     true
