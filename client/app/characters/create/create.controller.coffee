@@ -50,7 +50,9 @@ angular.module 'miriClientServerApp'
   $scope.create_character = ->
     $scope.errors = []
     if validateName($scope.character.name)
-      console.log $scope.character
+      Socket.send
+        command: "create"
+        args: $scope.character
 
   $scope.step_back = ->
     $scope.character.name = null              if $scope.step <= 5
