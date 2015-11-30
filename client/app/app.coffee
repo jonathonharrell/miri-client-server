@@ -48,3 +48,6 @@ angular.module 'miriClientServerApp', [
 
   $rootScope.$on '$stateChangeSuccess', (event, next) ->
     nanobar.go 100
+
+  $rootScope.$on 'ws.unexpected_close', (event, next) ->
+    $state.go "main.connect"

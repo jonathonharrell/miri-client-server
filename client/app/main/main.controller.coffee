@@ -2,6 +2,8 @@
 
 angular.module 'miriClientServerApp'
 .controller 'MainCtrl', ($scope, $rootScope, $state, Socket, Auth) ->
+  $state.go 'main.connect' unless Socket.connected()
+
   $scope.msgs = []
   $scope.admin_form =
     args: undefined
