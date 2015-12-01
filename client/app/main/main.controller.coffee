@@ -2,7 +2,7 @@
 
 angular.module 'miriClientServerApp'
 .controller 'MainCtrl', ($scope, $rootScope, $state, Socket, Auth) ->
-  $state.go 'main.connect' unless Socket.connected()
+  $state.go 'main.connect' unless Socket.connected() or not Auth.isLoggedIn()
 
   $scope.msgs = []
   $scope.admin_form =
