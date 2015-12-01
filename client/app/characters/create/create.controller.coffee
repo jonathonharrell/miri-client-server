@@ -24,6 +24,7 @@ angular.module 'miriClientServerApp'
   $scope.errors = []
   $scope.backgrounds = {}
   $scope.description = {}
+  $scope.showLoader = false
   for_validation =
     aesthetic_traits:  []
     functional_traits: []
@@ -158,8 +159,10 @@ angular.module 'miriClientServerApp'
 
   $scope.$on 'ws.msg', (e, m) ->
     $scope.handler(e, m)
+    $scope.showLoader = false
 
   get = (o) ->
+    $scope.showLoader = true
     Socket.send
       command: "options"
       args:

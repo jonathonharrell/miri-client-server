@@ -17,6 +17,8 @@
           | {{backgrounds[character.background].name || '?'}}
         br
     .row.char-create(ng-show='step === 0')
+      .col-sm-12.text-center(ng-show='showLoader')
+        img.loader(src="/assets/images/loader.gif")
       .col-sm-1
       .col-sm-5.scrollable
         .row.cc-race(ng-repeat='(id, r) in races', ng-class='{selected: character.race == id}', ng-click='select("race", id)')
@@ -33,11 +35,15 @@
         p(ng-bind-html='races[character.race].long_description')
 
     .row.char-create(ng-show='step === 1')
+      .col-sm-12.text-center(ng-show='showLoader')
+        img.loader(src="/assets/images/loader.gif")
       .col-sm-2
       .col-sm-4.cc-gender(ng-repeat='(id, g) in genders', ng-class='{selected: character.gender == id}', ng-click='select("gender", id)')
         h4 {{g.name}}
 
     .row.char-create(ng-show='step === 2')
+      .col-sm-12.text-center(ng-show='showLoader')
+        img.loader(src="/assets/images/loader.gif")
       .col-sm-1
       .col-sm-2.cc-description.scrollable
         h4 Description
@@ -55,6 +61,8 @@
               span.img(trait='t.id', category='c.id')
           
     .row.char-create(ng-show='step === 3')
+      .col-sm-12.text-center(ng-show='showLoader')
+        img.loader(src="/assets/images/loader.gif")
       .col-sm-1
       .col-sm-2.cc-description.scrollable
         p
@@ -78,6 +86,8 @@
           | and adding negative ones will increase it. In order for a character to be valid, your point deficit must be greater then or equal to zero.
           
     .row.char-create(ng-show='step === 4')
+      .col-sm-12.text-center(ng-show='showLoader')
+        img.loader(src="/assets/images/loader.gif")
       .col-sm-1
       .col-sm-10
         .row
