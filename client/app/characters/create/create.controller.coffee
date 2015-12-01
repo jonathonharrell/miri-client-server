@@ -54,7 +54,8 @@ angular.module 'miriClientServerApp'
         command: "create"
         args: $scope.character
       $scope.handler = (event, result) ->
-        # @todo handle incoming error messages or a success
+        $scope.errors = result.errors unless result.success
+        $state.go 'main.characterSelect' if result.success
 
   $scope.step_back = ->
     $scope.character.name = null              if $scope.step <= 5
