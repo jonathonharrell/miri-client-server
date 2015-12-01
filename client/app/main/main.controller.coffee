@@ -19,7 +19,7 @@ angular.module 'miriClientServerApp'
 
   $scope.sendCommand = ->
     Socket.send
-      command: $scope.admin_form.command
+      command: 'admin_' + $scope.admin_form.command
       args: if $scope.admin_form.args then JSON.parse($scope.admin_form.args) else undefined
     $scope.admin_form.args = undefined
 
