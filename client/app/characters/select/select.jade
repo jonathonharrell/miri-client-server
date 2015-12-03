@@ -11,10 +11,10 @@
             h4 Empty
             a.btn.play-btn.btn-primary.btn-lg(ui-sref='main.characterCreate') Create
           span(ng-switch-default='')
-            a.pull-right.red(ng-click='deleteCharacter(n.id)', href="#") X
+            a.pull-right.red(ng-click='deleteCharacter(n)', href="#") X
             h4 {{ n.name }}
             trait(trait-icon='n')
             p A quick little blurb about the character maybe.
             br
             | Current Location
-            a.btn.play-btn.btn-primary.btn-lg(ng-click='select_character(n.id)') Play
+            a.btn.play-btn.btn-primary.btn-lg(ng-click='selectCharacter(n.id)') Play

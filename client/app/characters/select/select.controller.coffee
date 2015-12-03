@@ -1,13 +1,20 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'CharacterSelectCtrl', ($scope, $state, Socket) ->
+.controller 'CharacterSelectCtrl', ($scope, $state, Socket, $modal) ->
   $state.go 'main.connect' unless Socket.connected()
 
   $scope.characters = []
 
-  Socket.send
-    command: "list"
+  $scope.deleteCharacter = (c) ->
+    modalInstance = $modal.open
+      templateUrl: 'app/characters/delete/delete.html'
+      controller: 'CharacterDeleteCtrl'
+      resolve:
+        character: c
+
+    modalInstance.result.then (list) ->
+      getList() if list
 
   $scope.$on "ws.msg", (e, m) ->
     if m
@@ -21,5 +28,10 @@ angular.module 'miriClientServerApp'
       else
         $scope.characters[i] = v
 
-  $scope.select_character = (id) ->
+  $scope.selectCharacter = (id) ->
     console.log id
+
+  getList = ->
+    Socket.send
+      command: "list"
+  getList()
