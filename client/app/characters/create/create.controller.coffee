@@ -168,7 +168,6 @@ angular.module 'miriClientServerApp'
       args:
         get: o
 
-  # @todo filter options
   getRaces = ->
     $scope.handler = (event, result) ->
       $scope.races[result["HUMAN"].id] = result['HUMAN'] # set human first
@@ -181,8 +180,8 @@ angular.module 'miriClientServerApp'
 
   getGenders = ->
     $scope.handler = (event, result) ->
-      $scope.genders = result
-      $scope.character.gender = _.sample(result).id unless $scope.character.gender?
+      $scope.genders = filtered_genders = $filter('traits')(result, $scope.character)
+      $scope.character.gender = _.sample(filtered_genders).id unless $scope.character.gender?
 
     get "genders"
 
@@ -206,8 +205,8 @@ angular.module 'miriClientServerApp'
 
   getBackgrounds = ->
     $scope.handler = (event, result) ->
-      $scope.backgrounds = result
-      $scope.character.background = _.sample(result).id unless $scope.character.background?
+      $scope.backgrounds = filtered_backgrounds = $filter('backgrounds')(result, $scope.character)
+      $scope.character.background = _.sample(filtered_backgrounds).id unless $scope.character.background?
     get "backgrounds"
 
   getRaces()
