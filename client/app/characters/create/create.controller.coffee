@@ -143,7 +143,7 @@ angular.module 'miriClientServerApp'
       $scope.errors.push 'You may only have a first name and a last name.'
       return false
 
-    unless /^[a-zA-Z._-\s]+$/.test(name)
+    unless /^['a-zA-Z-\s]+$/.test(name)
       $scope.errors.push 'Invalid characters in name'
       return false
 
