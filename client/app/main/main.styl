@@ -44,6 +44,11 @@ input, .btn, button, .form-control,
     &:hover, &:active
       text-decoration none
       color lighten(color-blue, 20)
+    &.red
+      color #DB7E79
+      &:hover, &:active
+        text-decoration none
+        color darken(#DB7E79, 10)
   hr
     border-top 1px solid color-iron
 
@@ -194,7 +199,6 @@ input, .btn, button, .form-control,
 
 .rad > input:not(:checked) + .img, .ckb > input:not(:checked) + .img
   opacity 0.5
-
 
 .modal-dialog
   overflow-y initial !important

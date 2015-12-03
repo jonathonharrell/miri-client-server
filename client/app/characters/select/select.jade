@@ -11,6 +11,7 @@
             h4 Empty
             a.btn.play-btn.btn-primary.btn-lg(ui-sref='main.characterCreate') Create
           span(ng-switch-default='')
+            a.pull-right.red(ng-click='deleteCharacter(n.id)', href="#") X
             h4 {{ n.name }}
             trait(trait-icon='n')
             p A quick little blurb about the character maybe.
