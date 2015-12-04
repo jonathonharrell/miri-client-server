@@ -29,7 +29,11 @@ angular.module 'miriClientServerApp'
         $scope.characters[i] = v
 
   $scope.selectCharacter = (id) ->
-    console.log id
+    Socket.send
+      command: "select"
+      args:
+        id: id
+    $state.go 'main'
 
   getList = ->
     Socket.send
