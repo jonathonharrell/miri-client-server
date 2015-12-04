@@ -9,13 +9,9 @@ angular.module 'miriClientServerApp'
     args: undefined
     command: ""
 
-  $scope.$on "ws.general_message", (e) ->
-    $scope.msgs.push msg
+  $scope.$on "ws.msg", (e, r) ->
+    $scope.msgs.push r
     $scope.$apply()
-
-  $scope.sendDialogCommand = ->
-    Socket.send $scope.dialog
-    $scope.dialog.args.input = ''
 
   $scope.sendCommand = ->
     Socket.send
