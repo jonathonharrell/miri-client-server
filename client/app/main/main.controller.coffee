@@ -11,6 +11,8 @@ angular.module 'miriClientServerApp'
 
   $scope.$on "ws.msg", (e, r) ->
     $scope.location = r.location if r.location
+    _.each r.messages, (msg) ->
+      $scope.msgs.push msg
     $scope.$apply()
 
   $scope.sendCommand = ->
