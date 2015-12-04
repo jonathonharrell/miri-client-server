@@ -10,7 +10,7 @@ angular.module 'miriClientServerApp'
     command: ""
 
   $scope.$on "ws.msg", (e, r) ->
-    $scope.location = r.location if r.location
+    $scope.location = r.room if r.room
     _.each r.messages, (msg) ->
       $scope.msgs.push msg
     $scope.$apply()
