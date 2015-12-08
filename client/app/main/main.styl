@@ -30,7 +30,6 @@ input, .btn, button, .form-control,
     background darken(color-smoke, 10)
 
 .miri-panel
-  font-family Pexico-Regular
   background color-jet
   color color-gainsboro
   margin 1em
@@ -54,6 +53,9 @@ input, .btn, button, .form-control,
         color darken(color-red, 10)
   hr
     border-top 1px solid color-iron
+
+.cursive
+  font-family 'Tangerine', cursive
 
 .overlay
   top 0
@@ -169,11 +171,10 @@ input, .btn, button, .form-control,
 
 .character-box
   text-align center
-  // background color-smoke
   background url(/assets/images/scroll.png) center no-repeat
   color color-tuatara
   min-height 400px
-  padding: 32px 20px
+  padding: 32px
   max-width 350px
   margin 0 auto
 
@@ -182,6 +183,11 @@ input, .btn, button, .form-control,
     bottom 20px
     width 34%
     left 33%
+    font-size 4rem
+    font-weight bold
+    color color-brown !important
+    &:hover, &:active
+      color darken(color-brown, 10) !important
 
 .rad, .ckb
   cursor pointer

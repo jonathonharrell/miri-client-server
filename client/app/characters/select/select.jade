@@ -9,7 +9,7 @@
         .character-box(ng-switch='n')
           span(ng-switch-when='undefined')
             h4 Empty
-            a.btn.play-btn.btn-primary.btn-lg(ui-sref='main.characterCreate') Create
+            a.cursive.play-btn(ui-sref='main.characterCreate') Create
           span(ng-switch-default='')
             a.pull-right.red(ng-click='deleteCharacter(n)', href="#") X
             h4 {{ n.name }}
@@ -17,4 +17,4 @@
             p A quick little blurb about the character maybe.
             br
             | Current Location
-            a.btn.play-btn.btn-primary.btn-lg(ng-click='selectCharacter(n.id)') Play
+            a.play-btn.cursive(ng-click='selectCharacter(n.id)') Play
