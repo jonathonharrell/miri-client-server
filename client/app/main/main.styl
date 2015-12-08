@@ -1,6 +1,6 @@
 html, body, .play-view
   height 100%
-  background color-jet
+  background darken(color-blue, 10)
 
 .has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline
   color color-red
@@ -31,7 +31,7 @@ input, .btn, button, .form-control,
 
 .miri-panel
   font-family Pexico-Regular
-  background darken(color-blue, 3)
+  background color-jet
   color color-gainsboro
   margin 1em
   border-style solid
@@ -46,7 +46,7 @@ input, .btn, button, .form-control,
     color lighten(color-blue, 25)
     &:hover, &:active
       text-decoration none
-      color lighten(color-blue, 20)
+      color lighten(color-blue, 15)
     &.red
       color color-red
       &:hover, &:active
@@ -164,8 +164,6 @@ input, .btn, button, .form-control,
 .message-container
   overflow-y scroll
   overflow-x auto
-  background color-monsoon
-  height 50%
   &::-webkit-scrollbar
     display none
 

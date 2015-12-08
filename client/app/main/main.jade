@@ -1,5 +1,4 @@
 .status-effects-box.miri-panel.text-center
-  p Status Effects
   status-effect(icon='-1')
   
 .location-box.miri-panel
@@ -7,7 +6,6 @@
   p {{location.description}}
 
 .action-box.miri-panel
-  h5 Action Messages
   .message-container(message-box="msgs")
     .row(ng-repeat="m in msgs")
       .col-xs-12.message {{m}}
