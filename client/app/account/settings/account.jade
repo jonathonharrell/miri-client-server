@@ -1,6 +1,8 @@
 .overlay
   .miri-panel
-    a.left(ui-sref="main") back
+    button.close(type='button', data-dismiss='modal', ui-sref="main")
+      span(aria-hidden='true') &times;
+      span.sr-only Close
     .inner-panel
       h1 Change Email
       hr

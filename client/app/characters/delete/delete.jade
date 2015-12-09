@@ -1,4 +1,4 @@
-div
+.miri-panel
   .modal-header
     button.close(type='button', data-dismiss='modal', ng-click='$close()')
       span(aria-hidden='true') &times;
@@ -9,4 +9,4 @@ div
       label Enter the character's first name to confirm.
       input.form-control(type='text', ng-model='characterDeleteName', placeholder='First Name')
     .form-group
-      button.btn-lg.btn-default(ng-click='delete()', ng-disabled='characterDeleteName != name') Delete
+      button.btn.btn-lg.btn-default(ng-click='delete()', ng-disabled='characterDeleteName != name') Delete

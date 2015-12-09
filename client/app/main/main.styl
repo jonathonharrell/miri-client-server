@@ -34,11 +34,11 @@ input, .btn, button, .form-control,
   color color-gainsboro
   margin 1em
   border-style solid
-  border-width 23px
-  -moz-border-image url(/assets/images/border.png) 23 repeat
-  -webkit-border-image url(/assets/images/border.png) 23 repeat
-  -o-border-image url(/assets/images/border.png) 23 repeat
-  border-image url(/assets/images/border.png) 23 fill repeat
+  border-width 16px
+  -moz-border-image url(/assets/images/border.png) 16 repeat
+  -webkit-border-image url(/assets/images/border.png) 16 repeat
+  -o-border-image url(/assets/images/border.png) 16 repeat
+  border-image url(/assets/images/border.png) 16 fill repeat
   border-image-outset 6px
   border-radius(0)
   a:not(.btn)
@@ -70,15 +70,16 @@ input, .btn, button, .form-control,
   resize both
   z-index 2
   .miri-panel
+    padding 0
     height auto
     min-width 700px
     width 50%
     border-style solid
-    border-width 46px
-    -moz-border-image url(/assets/images/border-thick.png) 46 repeat
-    -webkit-border-image url(/assets/images/border-thick.png) 46 repeat
-    -o-border-image url(/assets/images/border-thick.png) 46 repeat
-    border-image url(/assets/images/border-thick.png) 46 fill repeat
+    border-width 32px
+    -moz-border-image url(/assets/images/border-thick.png) 32 repeat
+    -webkit-border-image url(/assets/images/border-thick.png) 32 repeat
+    -o-border-image url(/assets/images/border-thick.png) 32 repeat
+    border-image url(/assets/images/border-thick.png) 32 fill repeat
     border-image-outset 6px
     border-radius(0)
     &.max
@@ -217,3 +218,17 @@ input, .btn, button, .form-control,
 .modal-body-scrollable
   height 400px
   overflow-y auto
+
+.modal-content
+  background transparent
+
+.close
+  color color-white
+  text-shadow 0 1px 0 color-gainsboro
+  opacity 0.5
+  &:hover, &:active
+    color color-smoke
+
+.back-arrow
+  font-size 2.5rem
+  float left

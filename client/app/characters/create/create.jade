@@ -4,6 +4,9 @@
       .col-sm-2
       .col-sm-8
         h1 Create Character - {{step_titles[step]}}
+    .row.text-center
+      .col-sm-4
+      .col-sm-4
         p {{step_descriptions[step]}}
         br
         p(ng-repeat='e in errors') 
@@ -37,15 +40,18 @@
     .row.char-create(ng-show='step === 1')
       .col-sm-12.text-center(ng-show='showLoader')
         img.loader(src="/assets/images/loader.gif")
-      .col-sm-2
-      .col-sm-4.cc-gender(ng-repeat='(id, g) in genders', ng-class='{selected: character.gender == id}', ng-click='select("gender", id)')
-        h4 {{g.name}}
+      .col-sm-3
+      .col-sm-3.cc-gender.text-center(ng-repeat='(id, g) in genders', ng-class='{selected: character.gender == id}', ng-click='select("gender", id)')
+        h4 
+          span.pull-left(ng-show='g.name == "Female"') &female;
+          span.pull-left(ng-show='g.name == "Male"') &male;
+          | {{g.name}}
 
     .row.char-create(ng-show='step === 2')
       .col-sm-12.text-center(ng-show='showLoader')
         img.loader(src="/assets/images/loader.gif")
       .col-sm-1
-      .col-sm-2.cc-description.scrollable
+      .col-sm-3.cc-description.scrollable
         h4 Description
         span(ng-repeat='(id, category) in description') 
           p(ng-repeat='desc in category') {{desc}}
@@ -101,6 +107,9 @@
       .col-sm-4
         .form-group
           input.form-control(type='text', name='name', ng-model='character.name', placeholder='First & Last Name')
+        .form-group.text-center
+          a.btn.btn-lg.btn-default(ng-click='create_character()')
+            | Create
     
     .row
       .col-sm-2
@@ -115,5 +124,3 @@
         a.pull-right(ng-show='step !== 5', ng-click='step_forward()')
           .step-text Next
           .next-arrow
-        a.pull-right.btn.btn-default(ng-show='step === 5', ng-click='create_character()')
-          | Create
