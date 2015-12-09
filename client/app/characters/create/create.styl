@@ -29,6 +29,41 @@
     border-radius(0)
     margin-right 20px
 
+.chat-bubble
+  background-color color-gainsboro
+  border-radius: 5px;
+  box-shadow 0 0 6px color-base
+  display inline-block
+  padding 10px 18px
+  position relative
+  vertical-align top
+  color color-oil
+  float right
+  margin 5px 20px 5px 45px
+  &:before
+    background-color color-gainsboro
+    content "\00a0"
+    display block
+    height: 16px;
+    position: absolute;
+    top: 11px;
+    transform:         rotate( 29deg ) skew( -35deg );
+    -moz-transform:    rotate( 29deg ) skew( -35deg );
+    -ms-transform:     rotate( 29deg ) skew( -35deg );
+    -o-transform:      rotate( 29deg ) skew( -35deg );
+    -webkit-transform: rotate( 29deg ) skew( -35deg );
+    width:  20px;
+    box-shadow 2px -2px 2px 0 rgba( 178, 178, 178, .4 )
+    right -9px
+
+.faerie-helper
+  height 32px
+  width 32px
+  background url('/assets/images/faerie.png') 0 0 no-repeat
+  position absolute
+  top 5px
+  right -20px
+
 .previous-arrow, .next-arrow
   height 64px
   margin 10px 4px

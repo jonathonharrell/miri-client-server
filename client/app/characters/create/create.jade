@@ -7,8 +7,6 @@
     .row.text-center
       .col-sm-4
       .col-sm-4
-        p {{step_descriptions[step]}}
-        br
         p(ng-repeat='e in errors') 
           span.label.label-danger {{e}}
     .row.text-center
@@ -110,17 +108,21 @@
         .form-group.text-center
           a.btn.btn-lg.btn-default(ng-click='create_character()')
             | Create
+    .row
+      br
     
     .row
-      .col-sm-2
+      .col-sm-4
         a(ng-show='step !== 0', ng-click='step_back()')
           .previous-arrow
           .step-text Previous
         a(ng-show='step === 0', ui-sref='main.characterSelect')
           .previous-arrow
           .step-text Cancel
-      .col-sm-8
-      .col-sm-2
+      .col-sm-4.text-center
+        .chat-bubble {{step_descriptions[step]}}
+        .faerie-helper
+      .col-sm-4
         a.pull-right(ng-show='step !== 5', ng-click='step_forward()')
           .step-text Next
           .next-arrow
