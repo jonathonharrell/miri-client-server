@@ -21,25 +21,32 @@
       .col-sm-12.text-center(ng-show='showLoader')
         img.loader(src="/assets/images/loader.gif")
       .col-sm-1
-      .col-sm-5.scrollable
+      .col-sm-3.scrollable
         .row.cc-race(ng-repeat='(id, r) in races', ng-class='{selected: character.race == id}', ng-click='select("race", id)')
-          .col-sm-3
-            img(src='http://placehold.it/100x100')
-          .col-sm-9
+          .topbottom
+          .leftright
+          .col-sm-12
             h4
               | {{r.name}}
               small
                 br
                 | {{r.description}}
-      .col-sm-5.end
-        h4 Description
-        p(ng-bind-html='races[character.race].long_description')
+      .col-sm-8.end
+        .row
+          .col-sm-7
+            h4 Description
+            p(ng-bind-html='races[character.race].long_description')
+          .col-sm-5
+            p Placeholder for images from Olie
+            img(src='http://placehold.it/250x500')
 
     .row.char-create(ng-show='step === 1')
       .col-sm-12.text-center(ng-show='showLoader')
         img.loader(src="/assets/images/loader.gif")
       .col-sm-3
       .col-sm-3.cc-gender.text-center(ng-repeat='(id, g) in genders', ng-class='{selected: character.gender == id}', ng-click='select("gender", id)')
+        .topbottom
+        .leftright
         h4 
           span.pull-left(ng-show='g.name == "Female"') &female;
           span.pull-left(ng-show='g.name == "Male"') &male;

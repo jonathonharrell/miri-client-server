@@ -1,13 +1,96 @@
+@keyframes move-top
+  0%
+    background-position 0 0
+  100%
+    background-position 10px 0px
+@keyframes move-bottom
+  0%
+    background-position 0 0
+  100%
+    background-position -10px 0px
+@keyframes move-left
+  0%
+    background-position 0 0
+  100%
+    background-position 0px -10px
+@keyframes move-right
+  0%
+    background-position 0 0
+  100%
+    background-position 0px 10px
+
+.leftright:after
+  content ''
+  position absolute
+  bottom 0
+  left 0
+  top 0
+  right 2px
+  height 100%
+  width 2px
+  background-position bottom
+  background-size 2px 11px
+  background-repeat repeat-y
+.leftright:before
+  content ''
+  position absolute
+  bottom 0
+  top 0
+  right 0px
+  height 100%
+  width 2px
+  background-position bottom
+  background-size 2px 11px
+  background-repeat repeat-y
+.topbottom:before
+  content ''
+  position absolute
+  bottom 0
+  left 0
+  right 0
+  height 2px
+  width 100%
+  background-position bottom
+  background-size 11px 2px
+  background-repeat repeat-x
+.topbottom:after
+  content ''
+  position absolute
+  top 0
+  left 0
+  right 0
+  height 2px
+  width 100%
+  background-position top
+  background-size 11px 2px
+  background-repeat repeat-x
+
 .char-create
   .cc-race, .cc-gender
     margin 4px 0 0 0
     background lighten(color-blue, 5)
     padding 5px
-    border 4px solid lighten(color-blue, 5)
     cursor pointer
+    transition all 0.3s ease
+    position relative
     &.selected
-      border 4px dotted lighten(color-gold, 10)
       cursor default
+      .leftright
+        &:after
+          animation move-left 1s linear infinite
+        &:before
+          animation move-right 1s linear infinite
+        &:after, &:before
+          background-image linear-gradient(to top, color-sky 70%, rgba(255, 255, 255, 0) 0%)
+      .topbottom
+        &:after
+          animation move-top 1s linear infinite
+        &:before
+          animation move-bottom 1s linear infinite
+        &:after, &:before
+          background-image linear-gradient(to right, color-sky 70%, rgba(255, 255, 255, 0) 0%)
+    &:hover
+      transform(scale(0.9))
   .cc-race:not(:first-child)
     margin 10px 0 0 0
   .cc-gender
@@ -44,15 +127,15 @@
     background-color color-gainsboro
     content "\00a0"
     display block
-    height: 16px;
-    position: absolute;
+    height 16px
+    position absolute
     top: 11px;
-    transform:         rotate( 29deg ) skew( -35deg );
-    -moz-transform:    rotate( 29deg ) skew( -35deg );
-    -ms-transform:     rotate( 29deg ) skew( -35deg );
-    -o-transform:      rotate( 29deg ) skew( -35deg );
-    -webkit-transform: rotate( 29deg ) skew( -35deg );
-    width:  20px;
+    transform         rotate( 29deg ) skew( -35deg )
+    -moz-transform    rotate( 29deg ) skew( -35deg )
+    -ms-transform     rotate( 29deg ) skew( -35deg )
+    -o-transform      rotate( 29deg ) skew( -35deg )
+    -webkit-transform rotate( 29deg ) skew( -35deg )
+    width 20px
     box-shadow 2px -2px 2px 0 rgba( 178, 178, 178, .4 )
     right -9px
 
