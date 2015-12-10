@@ -2,7 +2,7 @@ html, body, .play-view
   height 100%
   background darken(color-blue, 10)
 
-h1
+h1, .english
   font-family 'IM Fell English SC', serif
 
 .has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline
@@ -180,11 +180,10 @@ input, .btn, button, .form-control,
   min-height 400px
   padding: 32px
   max-width 350px
-  margin 0 auto
-
+  margin 20px auto
   .play-btn
     position absolute
-    bottom 20px
+    bottom 40px
     width 34%
     left 33%
     font-size 4rem
@@ -192,6 +191,10 @@ input, .btn, button, .form-control,
     color color-brown !important
     &:hover, &:active
       color darken(color-brown, 10) !important
+  .close
+    color color-red
+    &:hover, &:active
+      color darken(color-red, 10)
 
 .rad, .ckb
   cursor pointer
@@ -204,13 +207,16 @@ input, .btn, button, .form-control,
   position absolute
 
 .rad > .img, .ckb > .img
-  border 4px solid color-gainsboro
+  border 1px solid color-gainsboro
+  transition all 0.3s ease
+  &:hover
+    transform(scale(0.9))
 
 .rad:hover > .img
-  border 4px solid color-iron
+  border 1px solid color-ghost
 
-.rad > input:checked + .img
-  border 4px solid lighten(color-blue, 40)
+.rad > input:checked + .img, .ckb > input:checked + .img
+  border 1px solid color-sky
 
 .rad > input:not(:checked) + .img, .ckb > input:not(:checked) + .img
   opacity 0.5
