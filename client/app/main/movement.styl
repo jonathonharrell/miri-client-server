@@ -1,11 +1,13 @@
 .movement
   .north,.northeast,.northwest,.west,.east,.south,.southeast,.southwest
     position absolute
-    opacity 0.8
+    opacity 0.4
     transition: all 0.3s ease
-    &:hover
-      opacity 1
-      cursor pointer
+    &.active
+      opacity 0.8
+      &:hover
+        opacity 1
+        cursor pointer
   .north,.south,.east,.west,.compass
     height 48px
     width 48px

@@ -13,6 +13,7 @@ angular.module 'miriClientServerApp'
     $scope.location = r.room if r.room
     _.each r.messages, (msg) ->
       $scope.msgs.push msg
+    $scope.directions = r.directions if r.directions
     $scope.$apply()
 
   $scope.sendCommand = ->
