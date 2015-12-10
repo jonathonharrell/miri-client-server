@@ -1,3 +1,9 @@
+body
+  cursor url('/assets/images/cursor.png'), auto
+
+a:hover, button:hover
+  cursor url('/assets/images/cursor.png'), pointer !important
+
 html, body, .play-view
   height 100%
   background darken(color-blue, 10)
@@ -198,7 +204,7 @@ input, .btn, button, .form-control,
       color darken(color-red, 10)
 
 .rad, .ckb
-  cursor pointer
+  cursor url('/assets/images/cursor.png'), auto
   user-select none
   -webkit-user-select none
   -webkit-touch-callout none
