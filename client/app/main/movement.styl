@@ -1,0 +1,51 @@
+.movement
+  .north,.northeast,.northwest,.west,.east,.south,.southeast,.southwest
+    position absolute
+    opacity 0.8
+    transition: all 0.3s ease
+    &:hover
+      opacity 1
+      cursor pointer
+  .north,.south,.east,.west,.compass
+    height 48px
+    width 48px
+  .northwest,.northeast,.southwest,.southeast
+    height 32px
+    width 32px
+  .north
+    top 0
+    left 40%
+    background url('/assets/images/movement.png') 0 0 no-repeat
+  .south
+    top 116px
+    left 40%
+    background url('/assets/images/movement.png') -144px 0 no-repeat
+  .west
+    top 58px
+    left 20%
+    background url('/assets/images/movement.png') -96px 0 no-repeat
+  .east
+    top 58px
+    left 60%
+    background url('/assets/images/movement.png') -48px 0 no-repeat
+  .northeast
+    top 23px
+    left 57%
+    background url('/assets/images/movement.png') -96px -48px no-repeat
+  .northwest
+    top 24px
+    left 28%
+    background url('/assets/images/movement.png') -32px -48px no-repeat
+  .southeast
+    top 110px
+    left 57%
+    background url('/assets/images/movement.png') -64px -48px no-repeat
+  .southwest
+    top 111px
+    left 28%
+    background url('/assets/images/movement.png') 0 -48px no-repeat
+  .compass
+    position absolute
+    top 58px
+    left 40%
+    background url('/assets/images/movement.png') -192px 0 no-repeat
