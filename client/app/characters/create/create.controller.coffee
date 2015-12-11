@@ -107,7 +107,7 @@ angular.module 'miriClientServerApp'
     else
       return if unique and required
       $('input[name=' + category + ']').attr 'checked', false
-      $scope.point_deficit -= Number($scope.trait_tracker[category].points)
+      $scope.point_deficit -= Number(trait.points)
       $scope.character.functional_traits[category].splice index, 1
 
   validate = (type) ->
