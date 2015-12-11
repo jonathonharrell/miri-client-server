@@ -74,6 +74,7 @@ angular.module 'miriClientServerApp'
     index = $scope.character.aesthetic_traits[category].indexOf trait.id
     exists = index > -1
     unique = $scope.aesthetic_trait_categories[category].unique
+    required = $scope.aesthetic_trait_categories[category].min > 0
 
     $scope.description[category] = [] if unique and !exists
 
@@ -83,7 +84,8 @@ angular.module 'miriClientServerApp'
       $scope.description[category] = [] unless $scope.description[category]
       $scope.description[category].push trait.description
     else
-      return if unique
+      return if unique and required
+      $('input[name=' + category + ']').attr 'checked', false
       $scope.character.aesthetic_traits[category].splice index, 1
       $scope.description[category].splice $scope.description[category].indexOf(trait.description), 1
 
@@ -92,6 +94,7 @@ angular.module 'miriClientServerApp'
     index = $scope.character.functional_traits[category].indexOf trait.id
     exists = index > -1
     unique = $scope.functional_trait_categories[category].unique
+    required = $scope.functional_trait_categories[category].min > 0
 
     if unique and not exists and $scope.character.functional_traits[category].length > 0
       point_modifier = $scope.functional_trait_categories[category].traits[$scope.character.functional_traits[category][0]].points
@@ -102,7 +105,8 @@ angular.module 'miriClientServerApp'
       $scope.character.functional_traits[category].push trait.id
       $scope.point_deficit += Number(trait.points)
     else
-      return if unique
+      return if unique and required
+      $('input[name=' + category + ']').attr 'checked', false
       $scope.point_deficit -= Number($scope.trait_tracker[category].points)
       $scope.character.functional_traits[category].splice index, 1
 
