@@ -172,6 +172,19 @@ input, .btn, button, .form-control,
   position absolute
   bottom 20px
   left 220px
+  width 32px
+  height 32px
+  border 0
+  opacity 0.8
+  background url(/assets/images/ui.png) -128px -48px no-repeat
+  &:hover
+    opacity 1
+    &:after
+      content "Settings"
+      position absolute
+      left 38px
+      top 6px
+      color color-iron
 
 .message-container
   overflow-y scroll
