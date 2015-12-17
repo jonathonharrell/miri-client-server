@@ -11,12 +11,15 @@
             h3.english Empty
             a.cursive.play-btn(ui-sref='main.characterCreate') Create
           span(ng-switch-default='')
-            button.close(type='button', data-dismiss='modal', ng-click='deleteCharacter(n)')
+            button.close(type='button', data-dismiss='modal', ng-click='deleteCharacter(n.character)')
               span(aria-hidden='true') &times;
               span.sr-only Close
-            h3.english {{ n.name }}
-            trait(trait-icon='n')
-            p A quick little blurb about the character maybe.
-            br
-            | Current Location
-            a.play-btn.cursive(ng-click='selectCharacter(n.id)', href='#') Play
+            h3.english {{ n.character.name }}
+            p {{n.description}}
+            p
+              strong Realm: 
+              | {{n.realm}}
+            p
+              strong Location: 
+              | {{n.location}}
+            a.play-btn.cursive(ng-click='selectCharacter(n.character.id)', href='#') Play
