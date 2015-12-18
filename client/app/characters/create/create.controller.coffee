@@ -66,6 +66,10 @@ angular.module 'miriClientServerApp'
     $scope.description = {}                   if $scope.step <= 2
     $scope.character.gender = null            if $scope.step <= 1
 
+    $('input.aesthetic_trait').attr 'checked', false  if $scope.step <= 2
+    $('input.functional_trait').attr 'checked', false if $scope.step <= 3
+    $scope.point_deficit = 0                          if $scope.step <= 3
+
     $scope.errors = []
     $scope.step -= 1 if $scope.step > 0
 

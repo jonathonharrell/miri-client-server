@@ -64,10 +64,10 @@
           h3 {{c.name}}
           li(ng-repeat='t in c.traits | traits:character', tooltip-html='"{{t.name}}<br />{{t.description | trait_description:character}}"')
             label.rad(ng-if='c.unique')
-              input(type='radio', name='{{c.id}}', ng-click='selectAestheticTrait(t, c.id)')
+              input.aesthetic_trait(type='radio', name='{{c.id}}', ng-click='selectAestheticTrait(t, c.id)')
               span.img(trait="t.id", category='c.id')
             label.ckb(ng-if='!c.unique')
-              input(type='checkbox', name='{{t.id}}', ng-click='selectAestheticTrait(t, c.id)')
+              input.aesthetic_trait(type='checkbox', name='{{t.id}}', ng-click='selectAestheticTrait(t, c.id)')
               span.img(trait='t.id', category='c.id')
           
     .row.char-create(ng-show='step === 3')
@@ -86,12 +86,12 @@
           h3 {{c.name}}
           li(ng-repeat='t in c.traits | traits:character', tooltip-html='"{{t.name}}<br />{{t.description | trait_description:character}}"')
             label.rad(ng-if='c.unique')
-              input(type='radio', name='{{c.id}}', ng-click='selectFunctionalTrait(t, c.id)')
+              input.functional_trait(type='radio', name='{{c.id}}', ng-click='selectFunctionalTrait(t, c.id)')
               span.img(trait='t.id', category='c.id')
                 .topbottom
                 .leftright
             label.ckb(ng-if='!c.unique')
-              input(type='checkbox', name='{{t.id}}', ng-if='!t.required', ng-click='selectFunctionalTrait(t, c.id)')
+              input.functional_trait(type='checkbox', name='{{t.id}}', ng-if='!t.required', ng-click='selectFunctionalTrait(t, c.id)')
               span.img(trait='t.id', category='c.id')
                 .topbottom
                 .leftright
