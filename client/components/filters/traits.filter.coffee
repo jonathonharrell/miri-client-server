@@ -12,3 +12,11 @@ angular.module 'miriClientServerApp'
       filtered[item.id] = item
 
     filtered
+
+.filter 'trait_description', ->
+  return (item, character) ->
+    item = item.replace '[PossessivePronoun]', 'your'
+    item = item.replace '[Pronoun]', 'you'
+
+    item = item.charAt(0).toUpperCase() + item.slice(1)
+    item

@@ -58,11 +58,11 @@
       .col-sm-3.cc-description.scrollable
         h4 Description
         span(ng-repeat='(id, category) in description') 
-          p(ng-repeat='desc in category') {{desc}}
+          p(ng-repeat='desc in category') {{desc | trait_description:character}}
       .col-sm-6.end
         ul.list-inline(ng-repeat="(id, c) in aesthetic_trait_categories | traits:character")
           h3 {{c.name}}
-          li(ng-repeat='t in c.traits | traits:character', tooltip-html='"{{t.name}}<br />{{t.description}}"')
+          li(ng-repeat='t in c.traits | traits:character', tooltip-html='"{{t.name}}<br />{{t.description | trait_description:character}}"')
             label.rad(ng-if='c.unique')
               input(type='radio', name='{{c.id}}', ng-click='selectAestheticTrait(t, c.id)')
               span.img(trait="t.id", category='c.id')
