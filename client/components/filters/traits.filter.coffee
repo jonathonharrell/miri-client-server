@@ -15,20 +15,10 @@ angular.module 'miriClientServerApp'
 
 .filter 'trait_description', ->
   return (item, character) ->
-    possessivePronoun =
-      M: 'his'
-      F: 'her'
-      default: "it's"
-
-    pronoun =
-      M: 'he'
-      F: 'she'
-      default: "it"
-
-    if character.gender is "M" or character.gender is "F" then g = character.gender else g = 'default'
-
-    item = item.split('[PossessivePronoun]').join possessivePronoun[g]
-    item = item.split('[Pronoun]').join pronoun[g]
+    item = item.split('[PossessivePronoun]').join 'your'
+    item = item.split('[Pronoun]').join 'you'
+    item = item.split('[HaveHas]').join 'have'
+    item = item.split('[IsAre]').join 'are'
 
     item = item.charAt(0).toUpperCase() + item.slice(1)
     item

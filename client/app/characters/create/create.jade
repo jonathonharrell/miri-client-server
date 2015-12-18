@@ -84,7 +84,7 @@
       .col-sm-6
         ul.list-inline(ng-repeat='(id, c) in functional_trait_categories | traits:character')
           h3 {{c.name}}
-          li(ng-repeat='t in c.traits | traits:character', tooltip-html='"{{t.name}}<br />{{t.description}}"')
+          li(ng-repeat='t in c.traits | traits:character', tooltip-html='"{{t.name}}<br />{{t.description | trait_description:character}}"')
             label.rad(ng-if='c.unique')
               input(type='radio', name='{{c.id}}', ng-click='selectFunctionalTrait(t, c.id)')
               span.img(trait='t.id', category='c.id')
@@ -110,7 +110,7 @@
               .topbottom
               .leftright
               h4 {{bg.name}}
-              p.muted {{bg.description}}
+              p.muted {{bg.description | trait_description:character}}
         
     .row.char-create(ng-show='step === 5')
       .col-sm-4
