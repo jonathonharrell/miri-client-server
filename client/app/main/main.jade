@@ -37,14 +37,7 @@
   
 .movement-box.text-center.miri-panel
   .movement
-    .north(ng-class='{active: !!directions.north}')
-    .east(ng-class='{active: !!directions.east}')
-    .west(ng-class='{active: !!directions.west}')
-    .northwest(ng-class='{active: !!directions.northwest}')
-    .northeast(ng-class='{active: !!directions.northeast}')
-    .southwest(ng-class='{active: !!directions.southwest}')
-    .southeast(ng-class='{active: !!directions.southeast}')
-    .south(ng-class='{active: !!directions.south}')
+    span(class='{{d}}', ng-class='{active: !!directions[d]}', ng-click='send("move", {direction: d})', ng-repeat='d in MOVEMENT')
     .compass
 
 .admin-command-box.miri-panel(ng-show="auth.isAdmin()")

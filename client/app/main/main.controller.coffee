@@ -4,6 +4,7 @@ angular.module 'miriClientServerApp'
 .controller 'MainCtrl', ($scope, $rootScope, $state, Socket, Auth) ->
   $state.go 'main.connect' unless Socket.connected() or not Auth.isLoggedIn()
 
+  $scope.MOVEMENT = ['north','south','southeast','southwest','west','east','northwest','northeast']
   $scope.msgs = []
   $scope.admin_form =
     args: undefined
@@ -15,6 +16,11 @@ angular.module 'miriClientServerApp'
       $scope.msgs.push msg
     $scope.directions = r.directions if r.directions
     $scope.$apply()
+
+  $scope.send = (cmd, args) ->
+    Socket.send
+      command: cmd
+      args: args
 
   $scope.sendCommand = ->
     Socket.send
