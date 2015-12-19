@@ -37,7 +37,7 @@
   
 .movement-box.text-center.miri-panel
   .movement
-    span(class='{{d}}', ng-class='{active: !!directions[d]}', ng-click='send("move", {direction: d})', ng-repeat='d in MOVEMENT')
+    span(class='{{d}}', ng-class='{active: !!directions[d]}', ng-click='!!directions[d] && send("move", {direction: d})', ng-repeat='d in MOVEMENT')
     .compass
 
 .admin-command-box.miri-panel(ng-show="auth.isAdmin()")
