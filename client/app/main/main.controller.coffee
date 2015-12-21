@@ -13,7 +13,8 @@ angular.module 'miriClientServerApp'
   $scope.$on "ws.msg", (e, r) ->
     $scope.location = r.room if r.room
     _.each r.messages, (msg) ->
-      $scope.msgs.push msg
+      $('.message-container').append '<div class="row"><div class="col-sm-12">' + msg + '</div></div>'
+      $('.message-container').scrollTop $('.message-container')[0].scrollHeight
     $scope.directions = r.directions if r.directions
     $scope.$apply()
 

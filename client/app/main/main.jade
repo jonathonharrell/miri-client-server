@@ -6,9 +6,7 @@
   p {{location.description}}
 
 .action-box.miri-panel
-  .message-container(message-box="msgs")
-    .row(ng-repeat="m in msgs")
-      .col-xs-12.message {{m}}
+  .message-container.scrollable
       
 .weather-box.miri-panel
   h5 Weather and other location details
