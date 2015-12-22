@@ -36,11 +36,11 @@ describe "User Model", ->
     user.authenticate('blah').should.not.be.true
 
   it "should generate a reset password token on request", ->
-    user.should.not.have.property "resetPasswordToken"
-    user.should.not.have.property "resetPasswordSent"
+    expect(user.resetPasswordToken).to.be.undefined
+    expect(user.resetPasswordSent).to.be.undefined
     user.generateResetPasswordToken()
-    user.should.have.property "resetPasswordToken"
-    user.should.have.property "resetPasswordSent"
+    expect(user.resetPasswordToken).not.to.be.undefined
+    expect(user.resetPasswordSent).not.to.be.undefined
 
   it "should validate against a reset password token", ->
     res = user.checkResetToken(user.resetPasswordToken)

@@ -55,7 +55,7 @@ module.exports = (grunt) ->
         files: [ '<%= yeoman.client %>/{app,components}/**/*.css' ]
         tasks: [ 'injector:css' ]
       mochaTest:
-        files: [ 'server/**/*.spec.js' ]
+        files: [ 'server/**/*.spec.coffee', 'server/**/*.integration.coffee' ]
         tasks: [
           'env:test'
           'mochaTest'
@@ -108,7 +108,7 @@ module.exports = (grunt) ->
         ]
         options: livereload: true
       express:
-        files: [ 'server/**/*.{js,json}' ]
+        files: [ 'server/**/*.{js,json,coffee}' ]
         tasks: [
           'express:dev'
           'wait'
@@ -340,8 +340,13 @@ module.exports = (grunt) ->
       configFile: 'karma.conf.js'
       singleRun: true
     mochaTest:
-      options: reporter: 'spec'
-      src: [ 'server/**/*.spec.js' ]
+      options:
+        reporter: 'spec'
+        require: ["mocha.conf.js"]
+      unit:
+        src: ["server/**/*.spec.coffee"]
+      integration:
+        src: ["server/**/*.integration.coffee"]
     protractor:
       options: configFile: 'protractor.conf.js'
       chrome: options: args: browser: 'chrome'
@@ -481,7 +486,8 @@ module.exports = (grunt) ->
       grunt.task.run([
         'env:all'
         'env:test'
-        'mochaTest'
+        'mochaTest:unit'
+        'mochaTest:integration'
       ])
     else if target == 'client'
       grunt.task.run([
