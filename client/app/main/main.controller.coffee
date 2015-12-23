@@ -29,6 +29,10 @@ angular.module 'miriClientServerApp'
       args: if $scope.admin_form.args then JSON.parse($scope.admin_form.args) else undefined
     $scope.admin_form.args = undefined
 
+  $scope.sendDialogCommand = ->
+    Socket.send $scope.dialog
+    $scope.dialog.args.input = ''
+
   $scope.auth = Auth
 
   $scope.logout = ->
