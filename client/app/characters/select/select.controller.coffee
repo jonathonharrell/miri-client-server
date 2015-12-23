@@ -5,6 +5,7 @@ angular.module 'miriClientServerApp'
   $state.go 'main.connect' unless Socket.connected()
 
   $scope.characters = []
+  $scope.errors = []
 
   $scope.deleteCharacter = (c) ->
     modalInstance = $uibModal.open
@@ -16,7 +17,7 @@ angular.module 'miriClientServerApp'
     modalInstance.result.then (list) ->
       getList() if list
 
-  $scope.$on "ws.msg", (e, m) ->
+  $scope.handler = (e, m) ->
     if m
       characters = [m[0], m[1], m[2]] unless m[3]
     else
@@ -28,12 +29,19 @@ angular.module 'miriClientServerApp'
       else
         $scope.characters[i] = v
 
+  $scope.$on "ws.msg", (e, m) ->
+    $scope.handler(e, m)
+
   $scope.selectCharacter = (id) ->
+    $scope.handler = (e, m) ->
+      if m.success
+        $state.go 'main'
+      else
+        $scope.errors = m.errors
     Socket.send
       command: "select"
       args:
         id: id
-    $state.go 'main'
 
   getList = ->
     Socket.send
