@@ -33,6 +33,6 @@ angular.module 'miriClientServerApp'
       @ws.send JSON.stringify(msg) if @ws?
 
     @disconnect: ->
-      @ws.disconnect()
+      @ws.close()
 
   return SocketService

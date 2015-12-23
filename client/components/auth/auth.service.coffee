@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.factory 'Auth', ($http, User, $cookieStore, $q) ->
+.factory 'Auth', ($http, User, $cookieStore, $q, Socket) ->
   currentUser = if $cookieStore.get 'token' then User.get() else {}
 
   # Authenticate user and save token
@@ -22,6 +22,7 @@ angular.module 'miriClientServerApp'
 
   # Delete access token and user info
   logout: ->
+    Socket.disconnect()
     $cookieStore.remove 'token'
     currentUser = {}
     return
