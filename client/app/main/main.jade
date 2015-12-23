@@ -2,8 +2,10 @@
   status-effect(icon='-1')
   
 .location-box.miri-panel
-  h5 {{location.name}}
-  p {{location.description}}
+  h3.english {{location.name}}
+  .row 
+    .col-sm-6(style="border-right:1px solid rgba(255,255,255,0.2)")
+      p {{location.description}}
 
 .action-box.miri-panel
   .message-container.scrollable
