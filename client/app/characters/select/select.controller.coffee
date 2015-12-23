@@ -1,13 +1,13 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.controller 'CharacterSelectCtrl', ($scope, $state, Socket, $modal) ->
+.controller 'CharacterSelectCtrl', ($scope, $state, Socket, $uibModal) ->
   $state.go 'main.connect' unless Socket.connected()
 
   $scope.characters = []
 
   $scope.deleteCharacter = (c) ->
-    modalInstance = $modal.open
+    modalInstance = $uibModal.open
       templateUrl: 'app/characters/delete/delete.html'
       controller: 'CharacterDeleteCtrl'
       resolve:

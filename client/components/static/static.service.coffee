@@ -1,10 +1,10 @@
 'use strict'
 
 angular.module 'miriClientServerApp'
-.factory 'Static', ($modal) ->
+.factory 'Static', ($uibModal) ->
 
   open: (page) ->
-    $modal.open
+    $uibModal.open
       templateUrl: 'components/static/' + page + '.html'
       size: 'lg'
     .result

@@ -17,8 +17,8 @@
 .chat-box.miri-panel
   form(role="form", ng-submit="sendDialogCommand()", ng-init="dialog.command = 'say'")
     .input-group
-      .input-group-btn(dropdown="", is-open="dialogSelectOpen", ng-init="dialogSelectOpen = false")
-        button#dialog-select.btn.btn-default(dropdown-toggle="", type="button")
+      .input-group-btn(uib-dropdown="", is-open="dialogSelectOpen", ng-init="dialogSelectOpen = false")
+        button#dialog-select.btn.btn-default(uib-dropdown-toggle="", type="button")
           | {{dialog.command.charAt(0).toUpperCase() + dialog.command.slice(1)}} 
           span.caret
         ul.dropdown-menu(role="menu", aria-labelled-by="dialog-select")
@@ -49,6 +49,6 @@
 a(ui-sref='main')
   span.logo
 
-a.settings-button(popover-template="'app/account/settings/options.html'")
+a.settings-button(uib-popover-template="'app/account/settings/options.html'")
 
 .ui-view
