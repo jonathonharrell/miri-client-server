@@ -8,6 +8,7 @@ angular.module 'miriClientServerApp'
   $scope.errors = []
 
   $scope.deleteCharacter = (c) ->
+    $scope.handler = (e, m) ->
     modalInstance = $uibModal.open
       templateUrl: 'app/characters/delete/delete.html'
       controller: 'CharacterDeleteCtrl'
@@ -16,18 +17,6 @@ angular.module 'miriClientServerApp'
 
     modalInstance.result.then (list) ->
       getList() if list
-
-  $scope.handler = (e, m) ->
-    if m
-      characters = [m[0], m[1], m[2]] unless m[3]
-    else
-      characters = [undefined, undefined, undefined]
-
-    _.each characters, (v, i) ->
-      if v is null
-        $scope.characters[i] = null
-      else
-        $scope.characters[i] = v
 
   $scope.$on "ws.msg", (e, m) ->
     $scope.handler(e, m)
@@ -44,6 +33,17 @@ angular.module 'miriClientServerApp'
         id: id
 
   getList = ->
+    $scope.handler = (e, m) ->
+      if m
+        characters = [m[0], m[1], m[2]] unless m[3]
+      else
+        characters = [undefined, undefined, undefined]
+
+      _.each characters, (v, i) ->
+        if v is null
+          $scope.characters[i] = null
+        else
+          $scope.characters[i] = v
     Socket.send
       command: "list"
   getList()

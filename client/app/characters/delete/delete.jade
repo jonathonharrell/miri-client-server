@@ -5,6 +5,10 @@
       span.sr-only Close
     h3.modal-title Are you sure you want to delete {{name}}?
   .modal-body
+    .row
+      .col-sm-12
+        p(ng-repeat='e in errors') 
+          span.label.label-danger {{e}}
     .form-group
       label Enter the character's first name to confirm.
       input.form-control(type='text', ng-model='characterDeleteName', placeholder='First Name')
