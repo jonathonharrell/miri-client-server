@@ -12,9 +12,8 @@ angular.module 'miriClientServerApp'
 
   $scope.$on "ws.msg", (e, r) ->
     $scope.location = r.room if r.room
-    _.each r.messages, (msg) ->
-      $('.message-container').append '<div class="row"><div class="col-sm-12">' + msg + '</div></div>'
-      $('.message-container').scrollTop $('.message-container')[0].scrollHeight
+    $('.new-message').removeClass 'new-message'
+    _.each r.messages, handleMessage
     $scope.directions = r.directions if r.directions
     $scope.$apply()
 
@@ -38,3 +37,9 @@ angular.module 'miriClientServerApp'
   $scope.logout = ->
     Auth.logout ->
       $state.go "main.login"
+
+  handleMessage = (msg) ->
+    el = $('<div class="row new-message"><div class="col-sm-12">' + msg + '</div></div>')
+    el.hide().fadeIn(500)
+    $('.message-container').append(el)
+    $('.message-container').scrollTop $('.message-container')[0].scrollHeight
