@@ -1,5 +1,5 @@
 .status-effects-box.miri-panel.text-center
-  status-effect(icon='-1')
+  status-effect(ng-repeat='s in status_effects track by $index', icon='{{s.id}}', uib-tooltip='{{s.description}}', tooltip-placement='right')
   
 .location-box.miri-panel
   h3.english {{location.name}}
