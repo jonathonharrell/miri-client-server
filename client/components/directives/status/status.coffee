@@ -6,6 +6,8 @@ angular.module 'miriClientServerApp'
   scope:
     icon: '='
   link: (scope, element) ->
+    icon_map = []
+    scope.icon = icon_map.indexOf scope.icon
     per = 16 # 512/32
     row = Math.round((scope.icon - 1) / per)
     column = (scope.icon - (row * 16) - 1) * 32
