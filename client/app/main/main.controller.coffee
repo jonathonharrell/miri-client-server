@@ -6,15 +6,21 @@ angular.module 'miriClientServerApp'
 
   $scope.MOVEMENT = ['north','south','southeast','southwest','west','east','northwest','northeast']
   $scope.msgs = []
+  $scope.status_effects = []
+  $scope.time_weather = {}
+  $scope.entities = []
   $scope.state = 'default'
   $scope.admin_form =
     args: undefined
     command: ""
 
   $scope.$on "ws.msg", (e, r) ->
-    $scope.location   = r.room       if r.room
-    $scope.state      = r.state      if r.state isnt ""
-    $scope.directions = r.directions if r.directions
+    $scope.location       = r.room           if r.room
+    $scope.state          = r.state          if r.state isnt ""
+    $scope.directions     = r.directions     if r.directions
+    $scope.status_effects = r.status_effects if r.status_effects
+    $scope.time_weather   = r.time_weather   if r.time_weather
+    $scope.entities       = r.entities       if r.entities
 
     $('.new-message').removeClass 'new-message'
     _.each r.messages, handleMessage
