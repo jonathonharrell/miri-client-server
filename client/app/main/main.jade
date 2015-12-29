@@ -45,10 +45,10 @@
   h5 Hotkeys
   
 .movement-box.text-center.miri-panel
-  .movement(ng-show='state != "moving"')
+  .movement(ng-show='!moving()')
     span(class='{{d}}', ng-class='{active: !!directions[d]}', ng-click='!!directions[d] && send("move", {direction: d})', ng-repeat='d in MOVEMENT')
     .compass
-  .movement(ng-show='state == "moving"')
+  .movement(ng-show='moving()')
     img.loader(src="/assets/images/loader.gif")
 
 .admin-command-box.miri-panel(ng-show="auth.isAdmin()")

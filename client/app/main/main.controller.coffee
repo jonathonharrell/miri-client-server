@@ -9,7 +9,7 @@ angular.module 'miriClientServerApp'
   $scope.status_effects = []
   $scope.time_weather = {}
   $scope.entities = []
-  $scope.state = 'default'
+  $scope.state = []
   $scope.admin_form =
     args: undefined
     command: ""
@@ -47,6 +47,9 @@ angular.module 'miriClientServerApp'
   $scope.logout = ->
     Auth.logout ->
       $state.go "main.login"
+
+  $scope.moving = ->
+    _.contains $scope.state, "moving"
 
   handleMessage = (msg) ->
     el = $('<div class="row new-message"><div class="col-sm-12">' + msg + '</div></div>')
