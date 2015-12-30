@@ -8,7 +8,6 @@ angular.module 'miriClientServerApp'
   $scope.msgs = []
   $scope.status_effects = []
   $scope.time_weather = {}
-  $scope.entities = []
   $scope.state = []
   $scope.admin_form =
     args: undefined
@@ -20,7 +19,6 @@ angular.module 'miriClientServerApp'
     $scope.directions     = r.directions     if r.directions
     $scope.status_effects = r.status_effects if r.status_effects
     $scope.time_weather   = r.time_weather   if r.time_weather
-    $scope.entities       = r.entities       if r.entities
 
     $('.new-message').removeClass 'new-message'
     _.each r.messages, handleMessage

@@ -14,7 +14,7 @@
   h5 Weather and other location details
   
 .entities-box.miri-panel
-  h5 Interactable entities
+  p(ng-repeat='e in location.entities track by $index', ng-if='e.visible') {{e.name}}
   
 .chat-box.miri-panel
   .row
