@@ -163,3 +163,20 @@ selected-anim-border-spacing = 0
   font-size 2rem
   &:hover
     color darken(white, 20)
+
+.fade-border
+  position absolute
+  top -2em
+  img
+    display block
+  &:after
+    -moz-box-shadow inset 0 0 2em 2em color-jet
+    -webkit-box-shadow inset 0 0 2em 2em color-jet
+    box-shadow inset 0 0 2em 2em color-jet
+    position absolute
+    top 0
+    left 0
+    width 250px
+    height 500px
+    z-index 2
+    content ""

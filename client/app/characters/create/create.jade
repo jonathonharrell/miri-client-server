@@ -37,7 +37,8 @@
             h4 Description
             p(ng-bind-html='races[character.race].long_description')
           .col-sm-5
-            img(src='http://placehold.it/250x500')
+            .fade-border
+              img(src='/assets/images/human1.png')
 
     .row.char-create(ng-show='step === 1')
       .col-sm-12.text-center(ng-show='showLoader')
