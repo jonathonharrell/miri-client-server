@@ -25,6 +25,7 @@ angular.module 'miriClientServerApp'
   $scope.backgrounds = {}
   $scope.description = {}
   $scope.showLoader = false
+  $scope.raceImage = 'human1'
   for_validation =
     aesthetic_traits:  []
     functional_traits: []
@@ -39,6 +40,7 @@ angular.module 'miriClientServerApp'
 
   $scope.select = (key, val) ->
     $scope.character[key] = val if $scope.character[key]?
+    $scope.raceImage = $scope.character.race.toLowerCase() + String((Math.random() * 2 | 0) + 1) if key is "race"
 
   $scope.step_forward = ->
     $scope.step += 1

@@ -38,7 +38,7 @@
             p(ng-bind-html='races[character.race].long_description')
           .col-sm-5
             .fade-border
-              img(src='/assets/images/human1.png')
+              img(src='/assets/images/{{raceImage}}.png')
 
     .row.char-create(ng-show='step === 1')
       .col-sm-12.text-center(ng-show='showLoader')
