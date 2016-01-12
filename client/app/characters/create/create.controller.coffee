@@ -25,7 +25,7 @@ angular.module 'miriClientServerApp'
   $scope.backgrounds = {}
   $scope.description = {}
   $scope.showLoader = false
-  $scope.raceImage = 'human1'
+  $scope.raceImage = 'human' + String((Math.random() * 2 | 0) + 1)
   for_validation =
     aesthetic_traits:  []
     functional_traits: []
