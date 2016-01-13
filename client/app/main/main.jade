@@ -14,7 +14,8 @@
   h5 Weather and other location details
   
 .entities-box.miri-panel
-  p(ng-repeat='e in location.entities track by $index', ng-if='!e.not_visible') {{e.name}}
+  div(ng-repeat='(id, e) in location.entities', ng-if='!e.not_visible') 
+    span(context-menu="interactions(id, e)") {{e.name}}
   
 .chat-box.miri-panel
   .row
