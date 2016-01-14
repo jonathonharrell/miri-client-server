@@ -22,11 +22,16 @@ angular.module 'miriClientServerApp'
     $scope.directions     = r.directions     if r.directions
     $scope.status_effects = r.status_effects if r.status_effects
     $scope.time_weather   = r.time_weather   if r.time_weather
+    $scope.targets        = r.targets        if r.targets
+    console.log $scope.targets
 
     $('.new-message').removeClass 'new-message'
     _.each r.messages, handleMessage
 
     $scope.$apply()
+
+  $scope.targeted = (id) ->
+    _.contains $scope.targets, id
 
   $scope.send = (cmd, args) ->
     Socket.send
