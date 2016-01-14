@@ -10,7 +10,8 @@ angular.module 'miriClientServerApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'config'
+  'config',
+  'ui.bootstrap.contextMenu'
 ]
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) ->
   $urlRouterProvider

@@ -14,9 +14,13 @@
   h5 Weather and other location details
   
 .entities-box.miri-panel
-  div(ng-repeat='(id, e) in location.entities', ng-if='!e.not_visible') 
-    a(ng-click="send('target', id)", ng-if='!targeted(id)', href='#') {{e.name}}
-    a.selected(ng-click="send('untarget', id)", ng-if='targeted(id)', href='#') {{e.name}}
+  div(ng-repeat='(id, e) in location.entities', ng-if='!e.not_visible')
+    span(context-menu="interactions(id, e)", ng-if='interactions(id, e).length > 0')
+      a(ng-click="send('target', id)", ng-if='!targeted(id)', href='#') {{e.name}}
+      a.selected(ng-click="send('untarget', id)", ng-if='targeted(id)', href='#') {{e.name}}
+    span(ng-if='interactions(id, e).length <= 0')
+      a(ng-click="send('target', id)", ng-if='!targeted(id)', href='#') {{e.name}}
+      a.selected(ng-click="send('untarget', id)", ng-if='targeted(id)', href='#') {{e.name}}
   
 .chat-box.miri-panel
   .row
