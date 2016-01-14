@@ -19,22 +19,10 @@
 .chat-box.miri-panel
   .row
     .col-sm-12
-      form(role="form", ng-submit="sendDialogCommand()", ng-init="dialog.command = 'say'")
-        .input-group
-          .input-group-btn(uib-dropdown="", is-open="dialogSelectOpen", ng-init="dialogSelectOpen = false")
-            button#dialog-select.btn.btn-default(uib-dropdown-toggle="", type="button")
-              | {{dialog.command.charAt(0).toUpperCase() + dialog.command.slice(1)}} 
-              span.caret
-            ul.dropdown-menu(role="menu", aria-labelled-by="dialog-select")
-              li(role="menuitem")
-                a(ng-click="dialog.command = 'say'") Say
-              li(role="menuitem")
-                a(ng-click="dialog.command = 'whisper'") Whisper
-              li(role="menuitem")
-                a(ng-click="dialog.command = 'yell'") Yell
-          input.form-control.command-box(type='text', name="dialogInput", ng-model="dialog.args.input", placeholder="...", ng-disabled="{{commandBoxDisabled}}")
-          .input-group-btn
-            button.btn.btn-default Emotes
+      form.form(role="form", ng-submit="sendCmd()")
+        .form-group
+          input.form-control(type='text', name="cmdInput", ng-model="cmd", placeholder="...", ng-disabled="{{commandBoxDisabled}}")
+
   br
   .row
     .col-sm-12
@@ -47,7 +35,7 @@
   
 .movement-box.text-center.miri-panel
   .movement(ng-show='!moving()')
-    span(class='{{d}}', ng-class='{active: !!directions[d]}', ng-click='!!directions[d] && send("move", {direction: d})', ng-repeat='d in MOVEMENT')
+    span(class='{{d}}', ng-class='{active: !!directions[d]}', ng-click='!!directions[d] && send("move", d)', ng-repeat='d in MOVEMENT')
     .compass
   .movement(ng-show='moving()')
     img.loader(src="/assets/images/loader.gif")

@@ -9,13 +9,16 @@ angular.module 'miriClientServerApp'
   $scope.status_effects = []
   $scope.time_weather = {}
   $scope.state = []
+  $scope.cmd = ''
+  previous_commands = []
+  selected_command_index = 0
   $scope.admin_form =
     args: undefined
     command: ""
 
   $scope.$on "ws.msg", (e, r) ->
     $scope.location       = r.room           if r.room
-    $scope.state          = r.state          if r.state isnt ""
+    $scope.state          = r.state          if r.state isnt "" and r.state isnt null
     $scope.directions     = r.directions     if r.directions
     $scope.status_effects = r.status_effects if r.status_effects
     $scope.time_weather   = r.time_weather   if r.time_weather
@@ -28,7 +31,7 @@ angular.module 'miriClientServerApp'
   $scope.send = (cmd, args) ->
     Socket.send
       command: cmd
-      args: args
+      args: input: args
 
   $scope.sendCommand = ->
     Socket.send
@@ -36,9 +39,11 @@ angular.module 'miriClientServerApp'
       args: if $scope.admin_form.args then JSON.parse($scope.admin_form.args) else undefined
     $scope.admin_form.args = undefined
 
-  $scope.sendDialogCommand = ->
-    Socket.send $scope.dialog
-    $scope.dialog.args.input = ''
+  $scope.sendCmd = ->
+    cmd = $scope.cmd.split(" ")[0]
+    rest = $scope.cmd.replace(cmd + " ", "") || ""
+    Socket.send command: cmd, args: input: rest
+    $scope.cmd = ''
 
   $scope.auth = Auth
 
