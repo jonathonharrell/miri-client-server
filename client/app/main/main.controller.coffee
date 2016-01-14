@@ -38,9 +38,11 @@ angular.module 'miriClientServerApp'
        a = []
        a[0] = ($itemscope) -> i.title
        a[1] = ($itemscope) ->
-         $scope.send 'interact',
-           target: id
-           action: i.title
+         Socket.send
+           command: 'interact',
+           args:
+             target: id
+             action: i.title
        items.push a
      items
 
