@@ -25,18 +25,6 @@ angular.module 'miriClientServerApp'
 
     $scope.$apply()
 
-  $scope.interactions = (id, e) ->
-    items = []
-    _.each e.interactions, (i) ->
-      a = []
-      a[0] = ($itemscope) -> i.title
-      a[1] = ($itemscope) ->
-        $scope.send 'interact',
-          target: id
-          action: i.title
-      items.push a
-    items
-
   $scope.send = (cmd, args) ->
     Socket.send
       command: cmd
